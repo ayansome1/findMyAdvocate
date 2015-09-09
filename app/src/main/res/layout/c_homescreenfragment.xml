@@ -9,12 +9,12 @@
     <com.example.this_is_ayan.findmyadvocate.Widgets.CPagerSlidingTabStrip
         android:id="@+id/case_tabs"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/c_standard_height"
-        android:layout_gravity="bottom"
-        android:layout_marginTop="10dp"
-        android:background="#f7f7f7"
+        android:layout_height="@dimen/medium_height"
+        android:background="@android:color/white"
         app:pstsDeactivateTextColor="@color/c_tab_activated_text_color"
-        app:pstsTabSwitch="true" />
+        app:pstsTabSwitch="true"
+        app:pstsUnderlineHeight="@dimen/underline_height"/>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/case_viewpager"
         android:layout_width="match_parent"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <integer name="c_tab_indicator_height">5</integer>
+    <integer name="c_tab_indicator_height">3</integer>
     <!--<integer name="c_tab_indicator_height_small">10</integer> -->
     <integer name="img_tab_padding">12</integer>
 

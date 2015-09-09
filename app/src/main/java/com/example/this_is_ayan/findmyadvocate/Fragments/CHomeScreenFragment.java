@@ -40,11 +40,11 @@ public class CHomeScreenFragment extends Fragment
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         strip.setTabBackground(R.drawable.c_background_tab);
-        strip.setIndicatorHeight(getResources().getInteger(R.integer.c_tab_indicator_height));
+        strip.setIndicatorHeight(0);
         strip.setActivateTextColor(getResources().getColor(R.color.c_profile_activated_text_color));
         strip.setIndicatorColor(getResources().getColor(R.color.c_profile_activated_text_color));
-        strip.setShouldExpand(false);
-        strip.setTextSize((int) getResources().getDimension(R.dimen.c_font_supermini));
+        strip.setShouldExpand(true);
+        strip.setTextSize((int) getResources().getDimension(R.dimen.font_mini));
         strip.setActivateTextColor(getResources().getColor(R.color.c_profile_activated_text_color));
         strip.setDeactivateTextColor(getResources().getColor(R.color.c_profile_deactivated_textcolor));
         pager.setOffscreenPageLimit(1);
