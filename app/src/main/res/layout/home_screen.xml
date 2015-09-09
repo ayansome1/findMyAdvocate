@@ -1,0 +1,35 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+  <!--  <android.support.v4.widget.DrawerLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.widget.DrawerLayout>-->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <com.example.this_is_ayan.findmyadvocate.Widgets.CPagerSlidingTabStrip
+            android:id="@+id/c_tabs"
+            android:layout_width="match_parent"
+            android:background="@android:color/white"
+            android:layout_height="@dimen/c_standard_height"
+            app:pstsTabSwitch="true" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/c_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </android.support.v4.view.ViewPager>
+    </LinearLayout>
+
+
+</FrameLayout>

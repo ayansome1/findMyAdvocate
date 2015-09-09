@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">findMyAdvocate</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="case_types">
+        <item>Posted Cases</item>
+        <item>Post My Case</item>
+    </string-array>
+    <string name="title_activity_posted_cases_fragment">PostedCasesFragment</string>
+
+</resources>

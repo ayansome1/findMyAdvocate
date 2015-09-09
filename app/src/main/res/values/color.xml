@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="c_background_tab_pressed">#6633B5E5</color>
+    <color name="c_grey_color">#343333</color>
+    <color name="c_actionbar_backhground">#3B5999</color>
+    <color name="c_tab_activated_text_color">#ffffff</color>
+    <color name="c_profile_activated_text_color"> #fb6e52</color>
+    <color name="c_profile_deactivated_textcolor">#B0B0B0</color>
+
+
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f7f7f7"
+        android:orientation="vertical" >
+
+    <com.example.this_is_ayan.findmyadvocate.Widgets.CPagerSlidingTabStrip
+        android:id="@+id/case_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/c_standard_height"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="10dp"
+        android:background="#f7f7f7"
+        app:pstsDeactivateTextColor="@color/c_tab_activated_text_color"
+        app:pstsTabSwitch="true" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/case_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+</LinearLayout>
