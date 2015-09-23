@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="rd_enable" format="boolean"/>
+    <attr name="tv_fontFamily" format="reference|string"/>
+    <attr name="rd_style" format="reference"/>
+
 
     <declare-styleable name="CPagerSlidingTabStrip">
         <attr name="pstsIndicatorColor" format="color" />
@@ -17,5 +21,234 @@
         <attr name="pstsActivateTextColor" format="color" />
         <attr name="pstsDeactivateTextColor" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="FloatingActionButton">
+        <attr name="fab_colorNormal" format="color" />
+        <attr name="fab_colorPressed" format="color" />
+        <attr name="fab_colorDisabled" format="color" />
+        <attr name="fab_colorRipple" format="color" />
+        <attr name="fab_showShadow" format="boolean" />
+        <attr name="fab_shadowColor" format="color" />
+        <attr name="fab_shadowRadius" format="dimension" />
+        <attr name="fab_shadowXOffset" format="dimension" />
+        <attr name="fab_shadowYOffset" format="dimension" />
+        <attr name="fab_size" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="mini" value="1" />
+        </attr>
+        <attr name="fab_showAnimation" format="reference" />
+        <attr name="fab_hideAnimation" format="reference" />
+        <attr name="fab_label" format="string" />
+        <attr name="fab_elevationCompat" format="dimension" />
+        <attr name="fab_progress_color" format="color" />
+        <attr name="fab_progress_backgroundColor" format="color" />
+        <attr name="fab_progress_indeterminate" format="boolean" />
+        <attr name="fab_progress_max" format="integer" />
+        <attr name="fab_progress" format="integer" />
+        <attr name="fab_progress_showBackground" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="ThemableView">
+        <attr name="v_styleId" format="reference"/>
+    </declare-styleable>
+    <declare-styleable name="View">
+        <attr name="android:background" />
+        <attr name="android:backgroundTint" />
+        <attr name="android:backgroundTintMode" />
+        <attr name="android:elevation" />
+        <attr name="android:fadeScrollbars" />
+        <attr name="android:fadingEdgeLength" />
+        <attr name="android:minHeight" />
+        <attr name="android:minWidth" />
+        <attr name="android:padding" />
+        <attr name="android:paddingBottom" />
+        <attr name="android:paddingEnd" />
+        <attr name="android:paddingLeft" />
+        <attr name="android:paddingRight" />
+        <attr name="android:paddingStart" />
+        <attr name="android:paddingTop" />
+        <attr name="android:requiresFadingEdge" />
+        <attr name="android:scrollbarDefaultDelayBeforeFade" />
+        <attr name="android:scrollbarFadeDuration" />
+        <attr name="android:scrollbarSize" />
+        <attr name="android:scrollbarStyle" />
+        <attr name="android:soundEffectsEnabled" />
+        <attr name="android:textAlignment" />
+        <attr name="android:textDirection" />
+        <attr name="android:visibility" />
+        <attr name="android:layoutDirection" />
+    </declare-styleable>
+    <declare-styleable name="TextView">
+        <attr name="android:drawableBottom" />
+        <attr name="android:drawableEnd" />
+        <attr name="android:drawableLeft" />
+        <attr name="android:drawablePadding" />
+        <attr name="android:drawableRight" />
+        <attr name="android:drawableStart" />
+        <attr name="android:drawableTop" />
+        <attr name="android:fontFamily" />
+        <attr name="tv_fontFamily" />
+        <attr name="android:elegantTextHeight" />
+        <attr name="android:fontFeatureSettings" />
+        <attr name="android:gravity" />
+        <attr name="android:lines" />
+        <attr name="android:letterSpacing" />
+        <attr name="android:lineSpacingExtra" />
+        <attr name="android:lineSpacingMultiplier" />
+        <attr name="android:height" />
+        <attr name="android:ems" />
+        <attr name="android:width" />
+        <attr name="android:includeFontPadding" />
+        <attr name="android:cursorVisible" />
+        <attr name="android:maxEms" />
+        <attr name="android:maxHeight" />
+        <attr name="android:maxLength" />
+        <attr name="android:maxLines" />
+        <attr name="android:maxWidth" />
+        <attr name="android:minEms" />
+        <attr name="android:minHeight" />
+        <attr name="android:minLines" />
+        <attr name="android:minWidth" />
+        <attr name="android:scrollHorizontally" />
+        <attr name="android:shadowColor" />
+        <attr name="android:shadowDx" />
+        <attr name="android:shadowDy" />
+        <attr name="android:shadowRadius" />
+        <attr name="android:singleLine" />
+        <attr name="android:textAllCaps" />
+        <attr name="android:textColor" />
+        <attr name="android:textColorHighlight" />
+        <attr name="android:textColorHint" />
+        <attr name="android:textColorLink" />
+        <attr name="android:textScaleX" />
+        <attr name="android:textSize" />
+        <attr name="android:textStyle" />
+        <attr name="android:typeface" />
+    </declare-styleable>
+
+    <declare-styleable name="TextViewAppearance">
+        <attr name="android:textAppearance" />
+    </declare-styleable>
+    <declare-styleable name="TextAppearance">
+        <attr name="android:textColorHighlight" />
+        <attr name="android:textColor" />
+        <attr name="android:textColorHint" />
+        <attr name="android:textColorLink" />
+        <attr name="android:textSize" />
+        <attr name="android:textStyle" />
+        <attr name="android:typeface" />
+        <attr name="android:fontFamily" />
+        <attr name="tv_fontFamily" />
+        <attr name="android:textAllCaps" />
+        <attr name="android:shadowColor" />
+        <attr name="android:shadowDx" />
+        <attr name="android:shadowDy" />
+        <attr name="android:shadowRadius" />
+        <attr name="android:elegantTextHeight" />
+        <attr name="android:fontFeatureSettings" />
+        <attr name="android:letterSpacing" />
+    </declare-styleable>
+
+    <declare-styleable name="AutoCompleteTextView">
+        <attr name="android:completionHint" />
+        <attr name="android:completionThreshold" />
+        <attr name="android:dropDownAnchor" />
+        <attr name="android:dropDownHeight" />
+        <attr name="android:dropDownHorizontalOffset" />
+        <attr name="android:dropDownVerticalOffset" />
+        <attr name="android:dropDownWidth" />
+        <attr name="android:popupBackground" />
+    </declare-styleable>
+    <declare-styleable name="RippleView">
+        <attr name="rd_style" />
+        <attr name="rd_enable" />
+    </declare-styleable>
+
+    <declare-styleable name="RippleDrawable">
+        <attr name="rd_backgroundColor" format="reference|color"/>
+        <attr name="rd_backgroundAnimDuration" format="reference|integer"/>
+        <attr name="rd_maxRippleRadius" format="reference|dimension|integer">
+            <enum name="match_view" value="0x00000000" />
+        </attr>
+        <attr name="rd_rippleColor" format="reference|color"/>
+        <attr name="rd_rippleAnimDuration" format="reference|integer"/>
+        <attr name="rd_inInterpolator" format="reference"/>
+        <attr name="rd_outInterpolator" format="reference"/>
+        <attr name="rd_maskType" format="integer">
+            <enum name="rectangle" value="0x00000000" />
+            <enum name="oval" value="0x00000001" />
+        </attr>
+        <attr name="rd_rippleType" format="integer">
+            <enum name="touch" value="0x00000000" />
+            <enum name="wave" value="0x00000001" />
+        </attr>
+        <attr name="rd_cornerRadius" format="reference|dimension"/>
+        <attr name="rd_topLeftCornerRadius" format="reference|dimension"/>
+        <attr name="rd_topRightCornerRadius" format="reference|dimension"/>
+        <attr name="rd_bottomLeftCornerRadius" format="reference|dimension"/>
+        <attr name="rd_bottomRightCornerRadius" format="reference|dimension"/>
+        <attr name="rd_padding" format="reference|dimension"/>
+        <attr name="rd_leftPadding" format="reference|dimension"/>
+        <attr name="rd_topPadding" format="reference|dimension"/>
+        <attr name="rd_rightPadding" format="reference|dimension"/>
+        <attr name="rd_bottomPadding" format="reference|dimension"/>
+        <attr name="rd_delayClick" format="integer">
+            <enum name="none" value="0x00000000" />
+            <enum name="untilRelease" value="0x00000001" />
+            <enum name="afterRelease" value="0x00000002" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="EditText">
+        <attr name="et_inputId" format="reference"/>
+        <attr name="et_labelEnable" format="boolean"/>
+        <attr name="et_labelPadding" format="reference|dimension"/>
+        <attr name="et_labelTextSize" format="reference|dimension"/>
+        <attr name="et_labelTextColor" format="reference|color"/>
+        <attr name="et_labelTextAppearance" format="reference"/>
+        <attr name="et_labelEllipsize" format="integer">
+            <enum name="start" value="0x00000001" />
+            <enum name="middle" value="0x00000002" />
+            <enum name="end" value="0x00000003" />
+            <enum name="marquee" value="0x00000004" />
+        </attr>
+        <attr name="et_labelInAnim" format="reference"/>
+        <attr name="et_labelOutAnim" format="reference"/>
+        <attr name="et_supportMode" format="integer">
+            <enum name="none" value="0x00000000" />
+            <enum name="helper" value="0x00000001" />
+            <enum name="helperWithError" value="0x00000002" />
+            <enum name="charCounter" value="0x00000003" />
+        </attr>
+        <attr name="et_supportMaxChars" format="reference|integer"/>
+        <attr name="et_helper" format="reference|string"/>
+        <attr name="et_error" format="reference|string"/>
+        <attr name="et_supportPadding" format="reference|dimension"/>
+        <attr name="et_supportTextSize" format="reference|dimension"/>
+        <attr name="et_supportTextColor" format="reference|color"/>
+        <attr name="et_supportTextErrorColor" format="reference|color"/>
+        <attr name="et_supportTextAppearance" format="reference"/>
+        <attr name="et_supportSingleLine" format="boolean"/>
+        <attr name="et_supportMaxLines" format="reference|integer"/>
+        <attr name="et_supportLines" format="reference|integer"/>
+        <attr name="et_supportEllipsize" format="integer">
+            <enum name="start" value="0x00000001" />
+            <enum name="middle" value="0x00000002" />
+            <enum name="end" value="0x00000003" />
+            <enum name="marquee" value="0x00000004" />
+        </attr>
+        <attr name="et_dividerColor" format="reference|color"/>
+        <attr name="et_dividerErrorColor" format="reference|color"/>
+        <attr name="et_dividerHeight" format="reference|dimension"/>
+        <attr name="et_dividerPadding" format="reference|dimension"/>
+        <attr name="et_dividerAnimDuration" format="reference|integer"/>
+        <attr name="et_dividerCompoundPadding" format="boolean"/>
+        <attr name="et_autoCompleteMode" format="integer">
+            <enum name="none"   value="0"/>
+            <enum name="single" value="1"/>
+            <enum name="multi"  value="2"/>
+        </attr>
+    </declare-styleable>
+
+
 
 </resources>

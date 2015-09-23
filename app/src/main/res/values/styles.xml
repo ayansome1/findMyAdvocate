@@ -5,4 +5,21 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="ThemeToolbar" parent="Theme.AppCompat.Light">
+
+        <!-- navigation icon color -->
+        <item name="colorControlNormal">@color/nagigation_icon</item>
+
+
+    </style>
+
+   <!-- <style name="edit_text" parent="@android:style/Widget.EditText">
+        <item name="android:textColor">@color/blue_grey_darker_2</item>
+        <item name="android:textSize">@dimen/font_large</item>
+
+        <item name="android:gravity">center</item>
+    </style>-->
+
+
+
 </resources>

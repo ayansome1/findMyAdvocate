@@ -12,5 +12,6 @@
         <item>Post My Case</item>
     </string-array>
     <string name="title_activity_posted_cases_fragment">PostedCasesFragment</string>
+    <string name="title_activity_post_case">PostCase</string>
 
 </resources>

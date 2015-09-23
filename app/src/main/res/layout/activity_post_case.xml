@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_layout"/>
+
+
+    <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewLightFont
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_height"
+        android:text="Choose location"
+        android:drawableLeft="@drawable/location"
+        android:textSize="@dimen/font_large"
+        android:textColor="@color/blue_grey_darker_2"
+        android:gravity="center_vertical"
+        android:drawablePadding="@dimen/margin_medium"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"
+        android:background="@color/white" />
+
+    <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewLightFont
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_height"
+        android:text="Select case category"
+        android:drawableLeft="@drawable/category"
+        android:textSize="@dimen/font_large"
+        android:textColor="@color/blue_grey_darker_2"
+        android:gravity="center_vertical"
+        android:drawablePadding="@dimen/margin_medium"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"
+        android:background="@color/white" />
+
+
+</LinearLayout>

@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity
         strip.setIndicatorHeight(getResources().getInteger(R.integer.c_tab_indicator_height));
         strip.setTabPaddingLeftRight(getResources().getInteger(R.integer.img_tab_padding));
         strip.setActivateTextColor(getResources().getColor(R.color.c_grey_color));
-        strip.setIndicatorColor(getResources().getColor(R.color.c_actionbar_backhground));
+        strip.setIndicatorColor(getResources().getColor(R.color.c_actionbar_background));
         strip.setShouldExpand(true);
         strip.setDeactivateTextColor(getResources().getColor(R.color.c_grey_color));
         strip.setViewPager(viewPager);
@@ -54,7 +54,9 @@ public class HomeActivity extends AppCompatActivity
         public MainScreenFragment(FragmentManager fm) {
             super(fm);
             pageReseourceIds = new ArrayList<Integer>();
+          //  pageReseourceIds.add(R.array.case_types);
             pageReseourceIds.add(R.drawable.c_home_icon_selector);
+         //   pageReseourceIds.add(R.drawable.ic_cases);
 
             pageReseourceIds.add(R.drawable.c_notification_selector);
             pageReseourceIds.add(R.drawable.c_user_profile_selector);
