@@ -13,10 +13,22 @@
 
     <color name="grey_standard">#979797</color>
     <color name="grey">#9e9e9e</color>
+    <color name="black">#000000</color>
+
+
 
 
     <color name="blue_grey_darker_2">#455a64</color> <!--post case icon colors are these -->
     <color name="blue_grey_darker_4">#263238</color>
+    <color name="blue_grey_lighten_4">#b0bec5</color>
+    <color name="grey_lighten_2">#e0e0e0</color>
+    <color name="grey_lighten_1">#bdbdbd</color>
+
+
+
+
+
+
 
 
     <color name="nagigation_icon">#FFFFFF</color>

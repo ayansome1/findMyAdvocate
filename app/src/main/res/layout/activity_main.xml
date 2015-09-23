@@ -15,30 +15,6 @@
         android:text="@string/hello_world" android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-      <com.example.this_is_ayan.findmyadvocate.Widgets.EditText
-
-          android:id="@+id/textfield_et_char_counter"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="8dp"
-          android:inputType="textMultiLine"
-          android:hint="Input with char counter"
-          android:textSize="20dp"
-          app:et_inputId="@+id/textfield_et_char_counter_input"
-          app:et_supportMode="charCounter"
-          app:et_supportMaxChars="5"
-          app:et_labelEnable="true"
-          app:et_labelTextColor="@color/blue_standard"
-          app:et_dividerColor="@color/blue_standard"
-          app:et_dividerHeight="2dp"
-          app:et_labelInAnim="@anim/abc_slide_in_bottom"
-          app:et_labelOutAnim="@anim/abc_slide_out_bottom"
-            app:et_supportTextColor="@color/blue_standard"
-          app:et_supportTextErrorColor="@android:color/holo_red_light"
-          app:et_dividerErrorColor="@android:color/holo_red_light"
-          app:et_labelTextSize="30sp"
-          app:et_labelPadding="@dimen/margin_medium"
-          />
 
 
 

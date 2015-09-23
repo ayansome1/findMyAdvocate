@@ -1,10 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <include layout="@layout/toolbar_layout"/>
+
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical">
+
+        <com.example.this_is_ayan.findmyadvocate.Widgets.EditText
+
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/standard_height_half"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"
+        android:inputType="textMultiLine"
+        android:textColor="@color/black"
+        android:hint="Case title"
+        android:textSize="@dimen/font_large"
+        app:et_inputId="@+id/textfield_et_char_counter_input"
+        android:textColorHint="@color/grey_lighten_1"
+        app:et_supportMode="charCounter"
+        app:et_supportMaxChars="30"
+        app:et_labelEnable="true"
+        app:et_labelTextColor="@color/blue_grey_darker_2"
+        app:et_dividerColor="@color/blue_grey_darker_2"
+        app:et_dividerHeight="2dp"
+        app:et_labelInAnim="@anim/abc_fade_in"
+        app:et_labelOutAnim="@anim/abc_fade_out"
+        app:et_supportTextColor="@color/blue_grey_darker_2"
+        app:et_supportTextErrorColor="@android:color/holo_red_light"
+        app:et_dividerErrorColor="@android:color/holo_red_light"
+        app:et_labelTextSize="@dimen/font_large"
+        app:et_labelPadding="@dimen/margin_small"/>
+
+    <com.example.this_is_ayan.findmyadvocate.Widgets.EditText
+
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/standard_height_half"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"
+        android:inputType="textMultiLine"
+        android:textColor="@color/black"
+        android:hint="Case description"
+        android:textSize="@dimen/font_large"
+        app:et_inputId="@+id/textfield_et_char_counter_input"
+        android:textColorHint="@color/grey_lighten_1"
+        app:et_supportMode="charCounter"
+        app:et_supportMaxChars="300"
+        app:et_labelEnable="true"
+        app:et_labelTextColor="@color/blue_grey_darker_2"
+        app:et_dividerColor="@color/blue_grey_darker_2"
+        app:et_dividerHeight="2dp"
+        app:et_labelInAnim="@anim/abc_fade_in"
+        app:et_labelOutAnim="@anim/abc_fade_out"
+        app:et_supportTextColor="@color/blue_grey_darker_2"
+        app:et_supportTextErrorColor="@android:color/holo_red_light"
+        app:et_dividerErrorColor="@android:color/holo_red_light"
+        app:et_labelTextSize="@dimen/font_large"
+        app:et_labelPadding="@dimen/margin_small"/>
 
 
     <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewLightFont
@@ -16,16 +86,12 @@
         android:textColor="@color/blue_grey_darker_2"
         android:gravity="center_vertical"
         android:drawablePadding="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_medium"
         android:layout_marginLeft="@dimen/margin_medium"
         android:layout_marginRight="@dimen/margin_medium"
         />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="@dimen/margin_medium"
-        android:layout_marginRight="@dimen/margin_medium"
-        android:background="@color/white" />
+
 
     <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewLightFont
         android:layout_width="match_parent"
@@ -38,12 +104,43 @@
         android:drawablePadding="@dimen/margin_medium"
         android:layout_marginLeft="@dimen/margin_medium"
         android:layout_marginRight="@dimen/margin_medium"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="@dimen/margin_medium"
-        android:layout_marginRight="@dimen/margin_medium"
-        android:background="@color/white" />
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_height"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium">
+
+        <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewLightFont
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/standard_height"
+            android:text="Profile visibility"
+            android:drawableLeft="@drawable/visibility"
+            android:textSize="@dimen/font_large"
+            android:textColor="@color/blue_grey_darker_2"
+            android:gravity="center_vertical"
+            android:drawablePadding="@dimen/margin_medium"
+            />
+
+        <com.example.this_is_ayan.findmyadvocate.Widgets.Switch
+            android:layout_gravity="right|center_vertical"
+            android:checked="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+    </FrameLayout>
+
+ <!--   <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/margin_medium"
+            android:layout_marginRight="@dimen/margin_medium"
+            android:background="@color/white" />-->
+
+    </LinearLayout>
+
+
+    </ScrollView>
 
 </LinearLayout>

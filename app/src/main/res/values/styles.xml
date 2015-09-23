@@ -13,7 +13,7 @@
 
     </style>
 
-   <!-- <style name="edit_text" parent="@android:style/Widget.EditText">
+  <!-- <style name="edit_text" parent="@android:style/Widget.EditText">
         <item name="android:textColor">@color/blue_grey_darker_2</item>
         <item name="android:textSize">@dimen/font_large</item>
 

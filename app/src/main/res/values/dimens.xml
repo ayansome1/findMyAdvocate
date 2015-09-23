@@ -3,6 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="standard_height">48dp</dimen>
+    <dimen name="standard_height_half">24dp</dimen>
+
     <dimen name="medium_height">46dp</dimen>
 
     <dimen name="font_mini">12sp</dimen>
