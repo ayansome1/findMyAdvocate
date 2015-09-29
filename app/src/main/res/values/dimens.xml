@@ -12,6 +12,9 @@
     <dimen name="font_medium">16sp</dimen>
     <dimen name="font_large">18sp</dimen>
     <dimen name="font_larger">20sp</dimen>
+    <dimen name="font_larger_x">22sp</dimen>
+    <dimen name="font_larger_xx">24sp</dimen>
+
 
 
 
@@ -26,7 +29,7 @@
     <dimen name="margin_mini">5dp</dimen>
     <dimen name="margin_small">10dp</dimen>
     <dimen name="margin_medium">15dp</dimen>
-
+    <dimen name="height">70dp</dimen>
 
 
 </resources>

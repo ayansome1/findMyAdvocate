@@ -32,26 +32,15 @@ public class PostCase extends ActionBarActivity
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         saveImageView=(ImageView)findViewById(R.id.save);
 
-       // Dialog.Builder builder=null;
 
-
-
-
-       // dialog=new Dialog(getApplicationContext());
-        //dialog.applyStyle
-        //dialog.title("jj").show();
-       // dialog.setTitle("vghvhj");
-     //   toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-     //   getSupportActionBar().setHomeButtonEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-
 
         getSupportActionBar().setTitle("");
         titleEditText=(com.example.this_is_ayan.findmyadvocate.Widgets.EditText)findViewById(R.id.title);

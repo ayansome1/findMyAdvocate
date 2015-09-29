@@ -8,43 +8,44 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card_view:cardCornerRadius="3dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginLeft="9dp"
-        android:layout_marginRight="9dp"
-        card_view:cardElevation="0.01dp">
+        card_view:cardCornerRadius="4dp"
+        android:layout_marginTop="@dimen/margin_mini"
+        android:layout_marginLeft="@dimen/margin_mini"
+        android:layout_marginRight="@dimen/margin_mini" >
         <LinearLayout
             android:id="@+id/top_layout"
             android:layout_width="match_parent"
             android:orientation="vertical"
+            android:paddingLeft="@dimen/margin_medium"
+            android:paddingRight="@dimen/margin_medium"
+            android:paddingTop="@dimen/margin_small"
+            android:paddingBottom="@dimen/margin_small"
             android:background="@color/white"
             android:layout_height="wrap_content">
 
 
-            <TextView
+            <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:textColor="@color/blue_standard"
-                android:textSize="26sp"
-                android:text="Title"
-                 />
+                android:textColor="@color/black_text"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textSize="@dimen/font_larger_x"
+                android:text="Title"/>
 
 
-            <TextView
+            <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewLightFont
                 android:id="@+id/description"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="5dp"
-                android:paddingBottom="2dp"
-                android:textColor="#ff272727"
-                android:textSize="15dp"
-                android:text="Description"
-               />
+                android:layout_marginTop="@dimen/margin_mini"
+                android:textColor="@color/grey_text"
+                android:textSize="@dimen/font_large"
+                android:maxLines="2"
+                android:minLines="2"
+                android:ellipsize="end"
+                android:text="Description"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
