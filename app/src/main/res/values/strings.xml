@@ -13,5 +13,6 @@
     </string-array>
     <string name="title_activity_posted_cases_fragment">PostedCasesFragment</string>
     <string name="title_activity_post_case">PostCase</string>
+    <string name="title_activity_log_in_sign_up">LogInSignUp</string>
 
 </resources>

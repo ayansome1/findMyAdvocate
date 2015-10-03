@@ -25,6 +25,7 @@ public class HomeActivity extends AppCompatActivity
     CPagerSlidingTabStrip strip;
     //ArrayList<Integer> colors;
     MainScreenFragment mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
