@@ -266,6 +266,28 @@
         <attr name="android:checked" />
     </declare-styleable>
 
+    <declare-styleable name="FloatLabelLayout">
+        <attr name="floatLabelTextAppearance" format="reference" />
+        <attr name="floatLabelTrigger" format="enum">
+            <enum name="text" value="0" />
+            <enum name="focus" value="1" />
+        </attr>
+        <attr name="floatLabelSidePadding" format="reference|dimension" />
+        <attr name="floatLabelPaddingLeft" format="reference|dimension" />
+        <attr name="floatLabelPaddingRight" format="reference|dimension" />
+        <attr name="floatLabelPaddingTop" format="reference|dimension" />
+        <attr name="floatLabelPaddingBottom" format="reference|dimension" />
+        <!-- The hint to display in the floating label -->
+        <attr name="floatLabelHint" format="reference|string" />
+    </declare-styleable>
+
+
+
+    <style name="TextAppearance.YourApp.FloatLabel.Brown" parent="android:TextAppearance.Small">
+        <item name="android:textColor">@color/brown</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
 
 
 

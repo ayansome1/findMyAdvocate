@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center_vertical"
+    android:minWidth="300dp">
+
+
+    <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont
+        android:textSize="@dimen/font_large"
+        android:text="Sign Up with Email"
+        android:textColor="@color/black"
+        android:paddingTop="@dimen/margin_small"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginLeft="@dimen/margin_large_x"
+        android:layout_marginRight="@dimen/margin_large_x"/>
+
+
+
+
+
+    <com.example.this_is_ayan.findmyadvocate.Widgets.FloatLabelLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginLeft="@dimen/margin_large_x"
+        android:layout_marginRight="@dimen/margin_large_x"
+        app:floatLabelTrigger="text"
+        app:floatLabelTextAppearance="@style/TextAppearance.YourApp.FloatLabel.Brown">
+        <com.example.this_is_ayan.findmyadvocate.Widgets.MyEditTextLightFont
+            android:id="@+id/name_signup"
+            android:textColor="@color/black"
+            android:background="@drawable/edit_text_selector"
+            android:textSize="@dimen/font_medium"
+            android:paddingTop="@dimen/margin_mini"
+            android:inputType="textCapWords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"/>
+    </com.example.this_is_ayan.findmyadvocate.Widgets.FloatLabelLayout>
+
+    <com.example.this_is_ayan.findmyadvocate.Widgets.FloatLabelLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginLeft="@dimen/margin_large_x"
+        android:layout_marginRight="@dimen/margin_large_x"
+        app:floatLabelTrigger="text"
+        app:floatLabelTextAppearance="@style/TextAppearance.YourApp.FloatLabel.Brown">
+        <com.example.this_is_ayan.findmyadvocate.Widgets.MyEditTextLightFont
+            android:id="@+id/email_signup"
+            android:textColor="@color/black"
+            android:background="@drawable/edit_text_selector"
+            android:textSize="@dimen/font_medium"
+            android:paddingTop="@dimen/margin_mini"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"/>
+    </com.example.this_is_ayan.findmyadvocate.Widgets.FloatLabelLayout>
+
+
+    <com.example.this_is_ayan.findmyadvocate.Widgets.FloatLabelLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginLeft="@dimen/margin_large_x"
+        android:layout_marginRight="@dimen/margin_large_x"
+        app:floatLabelTrigger="text"
+        app:floatLabelTextAppearance="@style/TextAppearance.YourApp.FloatLabel.Brown">
+        <com.example.this_is_ayan.findmyadvocate.Widgets.MyEditTextLightFont
+            android:id="@+id/password_signup"
+            android:textColor="@color/black"
+            android:background="@drawable/edit_text_selector"
+            android:textSize="@dimen/font_medium"
+            android:paddingTop="@dimen/margin_mini"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"/>
+    </com.example.this_is_ayan.findmyadvocate.Widgets.FloatLabelLayout>
+
+
+
+
+
+
+
+    <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont
+        android:id="@+id/sign_up"
+        android:text="SIGN UP"
+        android:textColor="@color/white"
+        android:background="@color/brown"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_height"
+        android:layout_marginTop="@dimen/standard_height"
+        android:textSize="@dimen/font_small" />
+
+
+</LinearLayout>
