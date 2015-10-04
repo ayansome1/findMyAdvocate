@@ -13,10 +13,9 @@ import com.example.this_is_ayan.findmyadvocate.R;
 
 public class TestFragmentAdapter extends FragmentPagerAdapter  {
     private int[] offerImages = {
-            R.drawable.me1,
-            R.drawable.me2,
-            R.drawable.me3,
-            R.drawable.me1
+            R.drawable.post_a_case,
+            R.drawable.get_viewed,
+            R.drawable.connect,
     };
 
     private int mCount = offerImages.length;

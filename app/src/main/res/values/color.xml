@@ -9,6 +9,9 @@
     <color name="blue">#2196f3</color>
     <color name="red">#f44336</color>
 
+    <color name="brown">#3e2723</color>
+
+
 
     <color name="c_profile_activated_text_color"> #fb6e52</color>
     <color name="c_profile_deactivated_textcolor">#B0B0B0</color>

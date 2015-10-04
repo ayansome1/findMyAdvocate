@@ -32,7 +32,9 @@ public class LogInSignUp extends FragmentActivity
         indicator.setViewPager(mPager);
 
         final float density = getResources().getDisplayMetrics().density;
+
       /*  indicator.setBackgroundColor(0xFFCCCCCC);
+
         indicator.setRadius(10 * density);
         indicator.setPageColor(0xFF888888);
         indicator.setFillColor(0x880000FF);
