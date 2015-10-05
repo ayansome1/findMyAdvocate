@@ -10,7 +10,7 @@
 
     <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont
         android:textSize="@dimen/font_large"
-        android:text="Sign Up with Email"
+        android:text="Login with Email"
         android:textColor="@color/black"
         android:paddingTop="@dimen/margin_small"
         android:gravity="center_horizontal"
@@ -33,27 +33,7 @@
         app:floatLabelTrigger="text"
         app:floatLabelTextAppearance="@style/TextAppearance.YourApp.FloatLabel.Brown">
         <com.example.this_is_ayan.findmyadvocate.Widgets.MyEditTextLightFont
-            android:id="@+id/name_signup"
-            android:textColor="@color/black"
-            android:background="@drawable/edit_text_selector"
-            android:textSize="@dimen/font_medium"
-            android:paddingTop="@dimen/margin_mini"
-            android:inputType="textCapWords"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Name"/>
-    </com.example.this_is_ayan.findmyadvocate.Widgets.FloatLabelLayout>
-
-    <com.example.this_is_ayan.findmyadvocate.Widgets.FloatLabelLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_large"
-        android:layout_marginLeft="@dimen/margin_large_x"
-        android:layout_marginRight="@dimen/margin_large_x"
-        app:floatLabelTrigger="text"
-        app:floatLabelTextAppearance="@style/TextAppearance.YourApp.FloatLabel.Brown">
-        <com.example.this_is_ayan.findmyadvocate.Widgets.MyEditTextLightFont
-            android:id="@+id/email_signup"
+            android:id="@+id/email_signin"
             android:textColor="@color/black"
             android:background="@drawable/edit_text_selector"
             android:textSize="@dimen/font_medium"
@@ -74,7 +54,7 @@
         app:floatLabelTrigger="text"
         app:floatLabelTextAppearance="@style/TextAppearance.YourApp.FloatLabel.Brown">
         <com.example.this_is_ayan.findmyadvocate.Widgets.MyEditTextLightFont
-            android:id="@+id/password_signup"
+            android:id="@+id/password_signin"
             android:textColor="@color/black"
             android:background="@drawable/edit_text_selector"
             android:textSize="@dimen/font_medium"
@@ -92,8 +72,8 @@
 
 
     <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont
-        android:id="@+id/sign_up"
-        android:text="SIGN UP"
+        android:id="@+id/login"
+        android:text="LOGIN"
         android:textColor="@color/white"
         android:background="@color/brown_darken_2"
         android:gravity="center"

@@ -35,11 +35,40 @@ public class CHomeScreenFragment extends Fragment
 
     SwipeRefreshLayout mSwipeRefreshLayout;
 
+
+
+
+
+
+
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
 
-        View view=inflater.inflate(R.layout.c_homescreenfragment,container,false);
+
+
+
+
+            View view=inflater.inflate(R.layout.c_homescreenfragment,container,false);
+
+      /*  ParseUser currentUser = ParseUser.getCurrentUser();
+        System.out.println("in homescreenfragment user is "+currentUser);
+        currentUser.logOut();
+        System.out.println("in homescreenfragment user is " + currentUser);
+
+        if(currentUser == null) {
+            Intent intent = new Intent(getActivity(), LogInSignUp.class);
+            startActivity(intent);
+            getActivity().finish();
+        }*/
+
+
+
+
+
         mRecyclerView = (RecyclerView)view.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -92,9 +121,11 @@ public class CHomeScreenFragment extends Fragment
     {
         final List<caseObject> mItems = new ArrayList<>();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("cases");
+       // query.whereEqualTo("user", ParseUser.getCurrentUser());
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
-            public void done(List<ParseObject> caseList, ParseException e) {
+            public void done(List<ParseObject> caseList, ParseException e)
+            {
 
                 if (e == null)
                 {

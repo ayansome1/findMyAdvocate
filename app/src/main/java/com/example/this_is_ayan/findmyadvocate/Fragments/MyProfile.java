@@ -1,15 +1,17 @@
 package com.example.this_is_ayan.findmyadvocate.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
+import android.widget.TextView;
 
+import com.example.this_is_ayan.findmyadvocate.Activities.LogInSignUp;
 import com.example.this_is_ayan.findmyadvocate.R;
+import com.parse.ParseUser;
 
 /**
  * Created by collegedunia on 28/7/15.
@@ -25,10 +27,49 @@ public class MyProfile extends Fragment
       // images_product_frame=new ArrayList<FrameLayout>();
 
 
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+    /*    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         int windowHeight = displayMetrics.heightPixels;
-        heightOfFragmentLayout = windowHeight - linearLayoutHeight;
+        heightOfFragmentLayout = windowHeight - linearLayoutHeight;*/
+
+        TextView logout=(TextView)v.findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+               ParseUser currentUser = ParseUser.getCurrentUser();
+             /*   System.out.println(currentUser);
+                if(currentUser == null) {
+                    Intent intent = new Intent(getActivity(), LogInSignUp.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                }*/
+
+            //    System.out.println(" c u before logout is "+currentUser);
+
+                currentUser.logOut();
+               // currentUser = ParseUser.getCurrentUser();
+             //  System.out.println("c u after logout is "+ currentUser);
+
+                Intent intent = new Intent(getActivity(), LogInSignUp.class);
+                startActivity(intent);
+                getActivity().finish();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            }
+        });
 
 
        return v;

@@ -284,7 +284,7 @@
 
 
     <style name="TextAppearance.YourApp.FloatLabel.Brown" parent="android:TextAppearance.Small">
-        <item name="android:textColor">@color/brown</item>
+        <item name="android:textColor">@color/brown_darken_2</item>
         <item name="android:textSize">12sp</item>
     </style>
 

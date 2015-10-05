@@ -1,5 +1,6 @@
 package com.example.this_is_ayan.findmyadvocate.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +13,7 @@ import com.example.this_is_ayan.findmyadvocate.Fragments.MyProfile;
 import com.example.this_is_ayan.findmyadvocate.Fragments.Notifications;
 import com.example.this_is_ayan.findmyadvocate.R;
 import com.example.this_is_ayan.findmyadvocate.Widgets.CPagerSlidingTabStrip;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 
@@ -29,8 +31,22 @@ public class HomeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen);
+
+
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
+//        System.out.print(currentUser.getUsername());
+        if(currentUser == null) {
+            Intent intent = new Intent(this, LogInSignUp.class);
+            startActivity(intent);
+            finish();
+        }
+
+
         viewPager=(ViewPager)findViewById(R.id.c_viewpager);
         strip=(CPagerSlidingTabStrip)findViewById(R.id.c_tabs);
 

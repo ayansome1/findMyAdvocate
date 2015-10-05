@@ -116,6 +116,9 @@ public class PostCase extends ActionBarActivity
                 cases.put("caseTitle", title);
                 cases.put("caseDescription", description);
 
+              //  cases.setACL(new ParseACL(ParseUser.getCurrentUser()));
+            //    cases.setUser(ParseUser.getCurrentUser());
+
                 cases.saveInBackground();
 
             }
