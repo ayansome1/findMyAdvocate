@@ -36,7 +36,7 @@
             android:label="Home Activity" >
         </activity>
 
-    <!--    <activity
+      <!--  <activity
             android:name=".Activities.SplashActivity"
             android:label="Splash Activity Activity" >
         </activity>-->

@@ -112,14 +112,16 @@ public class PostCase extends ActionBarActivity
         saveImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Parse.initialize(getApplicationContext(), "Fm1sNQpCEuAjXCGkyjWINRThX3WxlxNx5WT4gR2n", "pgLajSQjLSH0Ocwve9r9Gd3HO7mS8GNwzmWtFiFf");
 
               /*  ParseObject cases = new ParseObject("cases");
                 cases.put("caseTitle", title);
                 cases.put("caseDescription", description);*/
+                ParseACL acl = new ParseACL(ParseUser.getCurrentUser());
+                acl.setPublicReadAccess(true);
 
                 cases cases = new cases();
-                cases.setACL(new ParseACL(ParseUser.getCurrentUser()));
+                cases.setACL(acl);
+
                 cases.setUser(ParseUser.getCurrentUser());
                 cases.put("caseTitle", title);
                 cases.put("caseDescription", description);

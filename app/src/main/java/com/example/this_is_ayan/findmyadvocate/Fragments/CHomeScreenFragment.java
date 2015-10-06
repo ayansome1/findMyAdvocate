@@ -111,13 +111,6 @@ public class CHomeScreenFragment extends Fragment
         return  view;
     }
 
-
-
-
-
-
-
-
     public  List<caseObject> getData()
     {
         final List<caseObject> mItems = new ArrayList<>();

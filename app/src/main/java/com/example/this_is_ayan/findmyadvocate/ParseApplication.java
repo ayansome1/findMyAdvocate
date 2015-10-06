@@ -2,10 +2,10 @@ package com.example.this_is_ayan.findmyadvocate;
 
 import android.app.Application;
 
+import com.example.this_is_ayan.findmyadvocate.Objects.cases;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseObject;
-import com.example.this_is_ayan.findmyadvocate.Objects.cases;
 
 /**
  * Created by this_is_ayan on 24-09-2015.
@@ -17,7 +17,7 @@ public class ParseApplication extends Application {
         ParseObject.registerSubclass(cases.class);
         Parse.initialize(this, "Fm1sNQpCEuAjXCGkyjWINRThX3WxlxNx5WT4gR2n", "pgLajSQjLSH0Ocwve9r9Gd3HO7mS8GNwzmWtFiFf");
        // ParseUser.enableRevocableSessionInBackground();
-       // ParseUser.enableAutomaticUser();
+     //   ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
 
         // If you would like all objects to be private by default, remove this line.
