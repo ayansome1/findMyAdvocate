@@ -20,6 +20,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,7 +122,7 @@ public class CHomeScreenFragment extends Fragment
     {
         final List<caseObject> mItems = new ArrayList<>();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("cases");
-       // query.whereEqualTo("user", ParseUser.getCurrentUser());
+        query.whereEqualTo("user", ParseUser.getCurrentUser());
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> caseList, ParseException e)

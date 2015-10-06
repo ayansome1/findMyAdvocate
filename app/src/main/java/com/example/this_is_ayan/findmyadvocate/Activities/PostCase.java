@@ -8,9 +8,11 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.this_is_ayan.findmyadvocate.Objects.cases;
 import com.example.this_is_ayan.findmyadvocate.R;
 import com.example.this_is_ayan.findmyadvocate.Widgets.Switch;
-import com.parse.ParseObject;
+import com.parse.ParseACL;
+import com.parse.ParseUser;
 
 public class PostCase extends ActionBarActivity
 {
@@ -112,12 +114,16 @@ public class PostCase extends ActionBarActivity
             public void onClick(View v) {
                 // Parse.initialize(getApplicationContext(), "Fm1sNQpCEuAjXCGkyjWINRThX3WxlxNx5WT4gR2n", "pgLajSQjLSH0Ocwve9r9Gd3HO7mS8GNwzmWtFiFf");
 
-                ParseObject cases = new ParseObject("cases");
+              /*  ParseObject cases = new ParseObject("cases");
+                cases.put("caseTitle", title);
+                cases.put("caseDescription", description);*/
+
+                cases cases = new cases();
+                cases.setACL(new ParseACL(ParseUser.getCurrentUser()));
+                cases.setUser(ParseUser.getCurrentUser());
                 cases.put("caseTitle", title);
                 cases.put("caseDescription", description);
 
-              //  cases.setACL(new ParseACL(ParseUser.getCurrentUser()));
-            //    cases.setUser(ParseUser.getCurrentUser());
 
                 cases.saveInBackground();
 
