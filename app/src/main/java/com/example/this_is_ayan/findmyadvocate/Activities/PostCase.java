@@ -123,8 +123,6 @@ public class PostCase extends ActionBarActivity
                 cases.setUser(ParseUser.getCurrentUser());
                 cases.put("caseTitle", title);
                 cases.put("caseDescription", description);
-
-
                 cases.saveInBackground();
 
             }
