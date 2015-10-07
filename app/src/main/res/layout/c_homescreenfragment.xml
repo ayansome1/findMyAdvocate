@@ -5,10 +5,10 @@
         android:layout_height="match_parent"
         android:background="@color/grey_lighten_2">
 
-    <android.support.v4.widget.SwipeRefreshLayout
+ <!--   <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content">-->
 
         <android.support.v7.widget.RecyclerView
              android:id="@+id/recycler_view"
@@ -16,7 +16,7 @@
              android:layout_height="match_parent"
              android:paddingBottom="@dimen/margin_mini" />
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+  <!--  </android.support.v4.widget.SwipeRefreshLayout>-->
 
 
      <com.example.this_is_ayan.findmyadvocate.Widgets.ProgressView

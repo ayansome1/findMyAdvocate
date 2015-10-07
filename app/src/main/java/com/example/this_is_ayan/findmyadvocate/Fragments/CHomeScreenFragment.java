@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -34,14 +33,7 @@ public class CHomeScreenFragment extends Fragment
      RecyclerView.Adapter mAdapter;
    public boolean datachanged;
     ProgressView progressView;
-    SwipeRefreshLayout mSwipeRefreshLayout;
-  //  CircularProgressDrawable cpd;
-
-
-
-
-
-
+   // SwipeRefreshLayout mSwipeRefreshLayout;
 
 
 
@@ -55,37 +47,19 @@ public class CHomeScreenFragment extends Fragment
         //progressView.start();
 
 
-      /*  ParseUser currentUser = ParseUser.getCurrentUser();
-        System.out.println("in homescreenfragment user is "+currentUser);
-        currentUser.logOut();
-        System.out.println("in homescreenfragment user is " + currentUser);
-
-        if(currentUser == null) {
-            Intent intent = new Intent(getActivity(), LogInSignUp.class);
-            startActivity(intent);
-            getActivity().finish();
-        }*/
-
-
-
-
+      
 
         mRecyclerView = (RecyclerView)view.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        //mAdapter=null;
         mAdapter = new CardAdapter(getActivity(),getData());
-        mRecyclerView.setAdapter(mAdapter);
-       //if(mAdapter!=null) progressView.stop();
+     //   mRecyclerView.setAdapter(mAdapter);
 
 
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
-
+    /*    mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.red, R.color.green, R.color.blue);
-       // final Context m;
-        //m=getActivity();
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh()
@@ -94,7 +68,7 @@ public class CHomeScreenFragment extends Fragment
                 mRecyclerView.setAdapter(mAdapter);
             }
 
-        });
+        });*/
 
 
 
@@ -139,11 +113,12 @@ public class CHomeScreenFragment extends Fragment
                         mItems.add(cases);
                     }
 
-                    mAdapter.notifyDataSetChanged();
-                 //   if(mAdapter2!=null)
-                   //      mAdapter2.notifyDataSetChanged();
+                  //  mAdapter.notifyDataSetChanged();
+                    mRecyclerView.setAdapter(mAdapter);
                     progressView.stop();
-                    mSwipeRefreshLayout.setRefreshing(false);
+
+
+                  //  mSwipeRefreshLayout.setRefreshing(false);
 
                 }
             }
