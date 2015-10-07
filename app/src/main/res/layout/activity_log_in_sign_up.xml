@@ -5,6 +5,10 @@
     android:layout_height="match_parent"
     tools:context="com.example.this_is_ayan.findmyadvocate.Activities.LogInSignUp">
 
+
+
+
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -14,10 +18,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </android.support.v4.view.ViewPager>
-
-
-
     </FrameLayout>
+
+
 
 <LinearLayout
     android:layout_width="match_parent"

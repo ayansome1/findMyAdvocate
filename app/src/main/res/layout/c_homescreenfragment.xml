@@ -19,6 +19,18 @@
     </android.support.v4.widget.SwipeRefreshLayout>
 
 
+     <com.example.this_is_ayan.findmyadvocate.Widgets.ProgressView
+         android:id="@+id/progress_view"
+         android:layout_width="@dimen/standard_height"
+         android:layout_height="@dimen/standard_height"
+         app:pv_autostart="true"
+         android:layout_gravity="center"
+         app:pv_progressStyle="@style/Material.Drawable.CircularProgress"
+         app:pv_progressMode="indeterminate"/>
+
+
+
+
 
     <com.example.this_is_ayan.findmyadvocate.Widgets.FloatingActionButton
         android:layout_width="wrap_content"

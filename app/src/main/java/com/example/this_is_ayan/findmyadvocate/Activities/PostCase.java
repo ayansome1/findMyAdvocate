@@ -1,18 +1,29 @@
 package com.example.this_is_ayan.findmyadvocate.Activities;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.KeyListener;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
 import com.example.this_is_ayan.findmyadvocate.Objects.cases;
 import com.example.this_is_ayan.findmyadvocate.R;
+import com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont;
+import com.example.this_is_ayan.findmyadvocate.Widgets.ProgressView;
 import com.example.this_is_ayan.findmyadvocate.Widgets.Switch;
 import com.parse.ParseACL;
+import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 public class PostCase extends ActionBarActivity
 {
@@ -23,12 +34,27 @@ public class PostCase extends ActionBarActivity
     String title,description;
     boolean titleFilledBoolean,descriptionFilledBoolean;
     ImageView saveImageView;
- //   Dialog dialog;
+
+    MyTextViewRegularFont ok;
+    Dialog dialog;
+    Context mContext;
+    ProgressView progressView;
+    KeyListener titleKeyListener,descriptionKeyListener;
+    InputMethodManager imm;
+
+    //   Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_case);
+
+
+        progressView =(ProgressView)findViewById(R.id.progress_view);
+
+
+        mContext=this;
+
         titleFilledBoolean=descriptionFilledBoolean=false;
         switchProfileVisibility=(Switch)findViewById(R.id.Switch);
         toolbar=(Toolbar)findViewById(R.id.toolbar);
@@ -37,6 +63,7 @@ public class PostCase extends ActionBarActivity
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,6 +139,19 @@ public class PostCase extends ActionBarActivity
         saveImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                saveImageView.setVisibility(View.INVISIBLE);
+                progressView.start();
+
+                imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+            /*    titleKeyListener = titleEditText.getKeyListener();
+                descriptionKeyListener=descriptionEditText.getKeyListener();*/
+                titleEditText.setKeyListener(null);
+                descriptionEditText.setKeyListener(null);
+
+
+
 
               /*  ParseObject cases = new ParseObject("cases");
                 cases.put("caseTitle", title);
@@ -125,7 +165,49 @@ public class PostCase extends ActionBarActivity
                 cases.setUser(ParseUser.getCurrentUser());
                 cases.put("caseTitle", title);
                 cases.put("caseDescription", description);
-                cases.saveInBackground();
+                //    cases.saveInBackground();
+
+
+                cases.saveInBackground(new SaveCallback() {
+
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            progressView.stop();
+                            //   saveImageView.setVisibility(View.VISIBLE);
+                            // titleEditText.setKeyListener(titleKeyListener);
+                            //descriptionEditText.setKeyListener(descriptionKeyListener);
+
+                            dialog = new Dialog(mContext);
+                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            dialog.setContentView(R.layout.dialog_data_posted);
+                            dialog.getWindow().getAttributes();//.windowAnimations = R.style.DialogAnimation;
+                            dialog.show();
+                            dialog.setCanceledOnTouchOutside(false);
+                            dialog.setCancelable(false);
+
+                            ok = (MyTextViewRegularFont) dialog.findViewById(R.id.ok);
+                            ok.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v)
+                                {
+                                    Intent intent=new Intent();
+                                    setResult(2, intent);  // 2 means  refresh needed of the recycler view
+                                    finish();
+
+                                }
+                            });
+
+
+                            // saveImageView.setVisibility(View.VISIBLE);
+
+
+                        } else {
+                            //myObjectSaveDidNotSucceed();
+                        }
+                    }
+                });
+
 
             }
         });
@@ -139,6 +221,14 @@ public class PostCase extends ActionBarActivity
 
 
 
+    }
+    @Override
+    public void onBackPressed()
+    {
+
+        Intent intent=new Intent();
+        setResult(1,intent);  // 1 means no refresh needed of the recycler view
+        finish();
     }
 
 

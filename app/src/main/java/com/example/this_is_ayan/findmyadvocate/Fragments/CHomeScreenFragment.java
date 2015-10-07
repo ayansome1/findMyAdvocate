@@ -16,6 +16,7 @@ import com.example.this_is_ayan.findmyadvocate.Adapters.CardAdapter;
 import com.example.this_is_ayan.findmyadvocate.Objects.caseObject;
 import com.example.this_is_ayan.findmyadvocate.R;
 import com.example.this_is_ayan.findmyadvocate.Widgets.FloatingActionButton;
+import com.example.this_is_ayan.findmyadvocate.Widgets.ProgressView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -30,12 +31,11 @@ public class CHomeScreenFragment extends Fragment
     FloatingActionButton fab;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    static RecyclerView.Adapter mAdapter;
+     RecyclerView.Adapter mAdapter;
    public boolean datachanged;
-
-
+    ProgressView progressView;
     SwipeRefreshLayout mSwipeRefreshLayout;
-
+  //  CircularProgressDrawable cpd;
 
 
 
@@ -49,11 +49,11 @@ public class CHomeScreenFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
 
+        View view=inflater.inflate(R.layout.c_homescreenfragment,container,false);
 
+        progressView=(ProgressView)view.findViewById(R.id.progress_view);
+        //progressView.start();
 
-
-
-            View view=inflater.inflate(R.layout.c_homescreenfragment,container,false);
 
       /*  ParseUser currentUser = ParseUser.getCurrentUser();
         System.out.println("in homescreenfragment user is "+currentUser);
@@ -74,21 +74,26 @@ public class CHomeScreenFragment extends Fragment
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
+        //mAdapter=null;
         mAdapter = new CardAdapter(getActivity(),getData());
         mRecyclerView.setAdapter(mAdapter);
+       //if(mAdapter!=null) progressView.stop();
 
 
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
 
         mSwipeRefreshLayout.setColorSchemeResources(R.color.red, R.color.green, R.color.blue);
-
+       // final Context m;
+        //m=getActivity();
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefresh() {
+            public void onRefresh()
+            {
                 mAdapter = new CardAdapter(getActivity(), getData());
                 mRecyclerView.setAdapter(mAdapter);
             }
+
         });
 
 
@@ -102,9 +107,10 @@ public class CHomeScreenFragment extends Fragment
         fab=(FloatingActionButton)view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Intent i = new Intent(getActivity(), PostCase.class);
-                startActivity(i);
+                startActivityForResult(i, 3);// Activity is started with random requestCode 3
 
             }
         });
@@ -118,14 +124,11 @@ public class CHomeScreenFragment extends Fragment
         query.whereEqualTo("user", ParseUser.getCurrentUser());
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
-            public void done(List<ParseObject> caseList, ParseException e)
-            {
+            public void done(List<ParseObject> caseList, ParseException e) {
 
-                if (e == null)
-                {
+                if (e == null) {
                     int len = caseList.size();
-                    for (int i = len-1; i >=0; i--)
-                    {
+                    for (int i = len - 1; i >= 0; i--) {
                         ParseObject p = caseList.get(i);
                         String caseTitle = p.getString("caseTitle");
                         String caseDescription = p.getString("caseDescription");
@@ -137,6 +140,9 @@ public class CHomeScreenFragment extends Fragment
                     }
 
                     mAdapter.notifyDataSetChanged();
+                 //   if(mAdapter2!=null)
+                   //      mAdapter2.notifyDataSetChanged();
+                    progressView.stop();
                     mSwipeRefreshLayout.setRefreshing(false);
 
                 }
@@ -145,4 +151,24 @@ public class CHomeScreenFragment extends Fragment
 
         return mItems;
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        System.out.println("result code is "+resultCode);
+        if(resultCode==2)// 2 is sent by PostCase class and it means  refreshing to be done of the recycler view
+        {
+            progressView.start();
+            mAdapter = new CardAdapter(getActivity(),getData());
+            mRecyclerView.setAdapter(mAdapter);
+
+
+        }
+
+
+    }
+
+
+
 }

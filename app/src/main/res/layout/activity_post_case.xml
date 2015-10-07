@@ -20,6 +20,17 @@
             android:visibility="invisible"
             android:layout_gravity="end|center_vertical"/>
 
+        <com.example.this_is_ayan.findmyadvocate.Widgets.ProgressView
+            android:id="@+id/progress_view"
+            android:layout_width="@dimen/standard_height_half"
+            android:layout_height="@dimen/standard_height_half"
+            android:background="@android:color/transparent"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginRight="@dimen/margin_small"
+            app:pv_autostart="false"
+            app:pv_progressStyle="@style/Material.Drawable.CircularProgress.White"
+            app:pv_progressMode="indeterminate"/>
+
 
 
     </FrameLayout>

@@ -24,6 +24,78 @@
         <item name="android:windowEnterAnimation">@anim/slide_up_dialog</item>
         <item name="android:windowExitAnimation">@anim/slide_out_down</item>
     </style>
+    <style name="Material.Drawable.CircularProgress">
+        <item name="cpd_padding">0dp</item>
+        <item name="cpd_initialAngle">0</item>
+        <item name="cpd_maxSweepAngle">270</item>
+        <item name="cpd_minSweepAngle">1</item>
+        <item name="cpd_strokeSize">4dp</item>
+        <item name="cpd_strokeColor">@color/blue</item>
+        <item name="cpd_strokeSecondaryColor">@android:color/transparent</item>
+        <item name="cpd_reverse">false</item>
+        <item name="cpd_rotateDuration">1000</item>
+        <item name="cpd_transformDuration">600</item>
+        <item name="cpd_keepDuration">200</item>
+        <item name="cpd_transformInterpolator">@android:anim/decelerate_interpolator</item>
+        <item name="pv_progressMode">indeterminate</item>
+
+        <item name="cpd_inAnimDuration">0</item>
+        <item name="cpd_outAnimDuration">@android:integer/config_mediumAnimTime</item>
+    </style>
+
+    <style name="Material.Drawable.CircularProgress.White" parent="Material.Drawable.CircularProgress">
+        <item name="cpd_padding">0dp</item>
+        <item name="cpd_initialAngle">0</item>
+        <item name="cpd_maxSweepAngle">270</item>
+        <item name="cpd_minSweepAngle">1</item>
+        <item name="cpd_strokeSize">2dp</item>
+        <item name="cpd_strokeColor">@color/white</item>
+        <item name="cpd_strokeSecondaryColor">@android:color/transparent</item>
+        <item name="cpd_reverse">false</item>
+        <item name="cpd_rotateDuration">1000</item>
+        <item name="cpd_transformDuration">600</item>
+        <item name="cpd_keepDuration">200</item>
+        <item name="cpd_transformInterpolator">@android:anim/decelerate_interpolator</item>
+        <item name="pv_progressMode">indeterminate</item>
+
+        <item name="cpd_inAnimDuration">0</item>
+        <item name="cpd_outAnimDuration">@android:integer/config_mediumAnimTime</item>
+    </style>
+
+
+
+
+
+
+
+
+    <style name="Material.Drawable"></style>
+    <style name="Material"></style>
+    <style name="Material.Widget"></style>
+
+
+    <style name="Material.Drawable.CircularProgress.Determinate" parent="Material.Drawable.CircularProgress">
+        <item name="pv_progressMode">determinate</item>
+        <item name="cpd_inAnimDuration">@android:integer/config_mediumAnimTime</item>
+    </style>
+    <style name="Material.Widget.ProgressView">
+        <item name="pv_progress">0</item>
+    </style>
+
+    <style name="Material.Widget.ProgressView.Circular" parent="Material.Widget.ProgressView">
+        <item name="pv_autostart">true</item>
+        <item name="pv_circular">true</item>
+        <item name="pv_progressStyle">@style/Material.Drawable.CircularProgress</item>
+        <item name="pv_progressMode">indeterminate</item>
+    </style>
+
+    <style name="Material.Widget.ProgressView.Circular.Determinate" parent="Material.Widget.ProgressView.Circular">
+        <item name="pv_progressStyle">@style/Material.Drawable.CircularProgress.Determinate</item>
+        <item name="pv_progressMode">determinate</item>
+    </style>
+
+
+
 
 
 

@@ -52,6 +52,7 @@ public class HomeActivity extends AppCompatActivity
 
         mAdapter=new MainScreenFragment(getSupportFragmentManager());
         viewPager.setAdapter(mAdapter);
+        viewPager.setOffscreenPageLimit(2);
         strip.setTabBackground(R.drawable.c_background_tab);
         strip.setIndicatorHeight(getResources().getInteger(R.integer.c_tab_indicator_height));
         strip.setTabPaddingLeftRight(getResources().getInteger(R.integer.img_tab_padding));
@@ -110,6 +111,20 @@ public class HomeActivity extends AppCompatActivity
             return pageReseourceIds.get(position);
         }
     }
+
+   /* @Override
+    public void onBackPressed() {
+
+        int count = getFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+            //additional code
+        } else {
+            getFragmentManager().popBackStack();
+        }
+
+    }*/
 
 }
 
