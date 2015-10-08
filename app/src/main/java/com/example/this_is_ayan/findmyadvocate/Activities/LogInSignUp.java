@@ -35,7 +35,7 @@ public class LogInSignUp extends FragmentActivity
     TextView signupView;
     TextView loginView;
     Context mContext;
-    Dialog dialog;
+    Dialog dialog,dialogLoading;
 
     EditText editTextemailSignin,editTextpasswordSignin, editTextnameSignUp, editTextemailSignUp,editTextPasswordSignUp;
 
@@ -92,34 +92,32 @@ public class LogInSignUp extends FragmentActivity
                         validation = validateSignupEntries();
                         if (validation == true)
                         {
-                          //  arg0.setEnabled(false);
 
-
-
-                           // ParseUser currentUser = ParseUser.getCurrentUser();
-                           // currentUser.logOut();
-
+                            dialogLoading = new Dialog(mContext);
+                            dialogLoading.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            dialogLoading.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            dialogLoading.setContentView(R.layout.dialog_loading);
+                            dialogLoading.getWindow().getAttributes();
+                            dialogLoading.show();
+                            dialogLoading.setCancelable(false);
 
                             ParseUser user = new ParseUser();
                             user.put("name", nameSignup);
-                          //  user.setUsername(nameSignup);
                             user.setUsername(emailSignup);
                             user.setPassword(passwordSignup);
-                          //  user.setEmail(emailSignup);
 
                             user.signUpInBackground(new SignUpCallback() {
                                 @Override
                                 public void done(ParseException e) {
                                     if (e == null)
                                     {
-                                        //System.out.print("all ok");
                                         Intent intent = new Intent(LogInSignUp.this, HomeActivity.class);
                                         startActivity(intent);
                                         finish();
                                     }
                                     else
                                     {
-                                       // System.out.print("all not ok");
+                                        dialogLoading.cancel();
                                         switch (e.getCode())
                                         {
                                             case ParseException.USERNAME_TAKEN:
@@ -129,7 +127,6 @@ public class LogInSignUp extends FragmentActivity
                                             default:
                                                 Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                                         }
-                                       // arg0.setEnabled(true);
                                     }
 
 
@@ -154,9 +151,6 @@ public class LogInSignUp extends FragmentActivity
             @Override
             public void onClick(View v)
             {
-
-               // Intent i = new Intent(LogInSignUp.this, PostCase.class);
-             //   startActivity(i);
                 dialog = new Dialog(mContext);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -173,28 +167,43 @@ public class LogInSignUp extends FragmentActivity
                     public void onClick(final View arg0)
                     {
 
-
                         emailSignin = editTextemailSignin.getText().toString();
                         passwordSignin = editTextpasswordSignin.getText().toString();
-
 
                         validation = false;
                         validation = validateSigninEntries();
 
 
+
+
+
                         if (validation == true)
                         {
+                            dialogLoading = new Dialog(mContext);
+                            dialogLoading.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            dialogLoading.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            dialogLoading.setContentView(R.layout.dialog_loading);
+                            dialogLoading.getWindow().getAttributes();
+                            dialogLoading.show();
+                            dialogLoading.setCancelable(false);
+
                             //  arg0.setEnabled(false);
 
 
                             ParseUser.logInInBackground(emailSignin, passwordSignin, new LogInCallback() {
                                 @Override
-                                public void done(ParseUser user, ParseException e) {
-                                    if (user != null) {
+                                public void done(ParseUser user, ParseException e)
+                                {
+                                    if (user != null)
+                                    {
+                                     //   dialogLoading.cancel();
                                         Intent intent = new Intent(LogInSignUp.this, HomeActivity.class);
                                         startActivity(intent);
                                         finish();
-                                    } else {
+                                    }
+                                    else
+                                    {
+                                        dialogLoading.cancel();
                                         switch (e.getCode()) {
 
 

@@ -37,7 +37,7 @@ public class PostCase extends ActionBarActivity
     ImageView saveImageView;
 
     MyTextViewRegularFont ok,cancel,dialogText;
-    Dialog dialog;
+    Dialog dialog,dialogLoading,dialogError;
     Context mContext;
     ProgressView progressView;
     KeyListener titleKeyListener,descriptionKeyListener;
@@ -239,15 +239,29 @@ public class PostCase extends ActionBarActivity
             @Override
             public void onClick(View v) {
                 saveImageView.setVisibility(View.INVISIBLE);
-                progressView.start();
+              //  progressView.start();
 
                 imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
+
+
+                dialogLoading = new Dialog(mContext);
+                dialogLoading.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialogLoading.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialogLoading.setContentView(R.layout.dialog_loading);
+                dialogLoading.getWindow().getAttributes();
+                dialogLoading.show();
+                dialogLoading.setCancelable(false);
+
+
+
+
+
             /*    titleKeyListener = titleEditText.getKeyListener();
                 descriptionKeyListener=descriptionEditText.getKeyListener();*/
-                titleEditText.setKeyListener(null);
-                descriptionEditText.setKeyListener(null);
+              //  titleEditText.setKeyListener(null);
+                //descriptionEditText.setKeyListener(null);
 
 
 
@@ -271,7 +285,8 @@ public class PostCase extends ActionBarActivity
 
                     public void done(ParseException e) {
                         if (e == null) {
-                            progressView.stop();
+                            dialogLoading.cancel();
+                           // progressView.stop();
                             //   saveImageView.setVisibility(View.VISIBLE);
                             // titleEditText.setKeyListener(titleKeyListener);
                             //descriptionEditText.setKeyListener(descriptionKeyListener);
@@ -300,8 +315,27 @@ public class PostCase extends ActionBarActivity
                             // saveImageView.setVisibility(View.VISIBLE);
 
 
-                        } else {
-                            //myObjectSaveDidNotSucceed();
+                        }
+                        else
+                        {
+                            saveImageView.setVisibility(View.VISIBLE);
+                           // progressView.stop();
+                            dialogLoading.cancel();
+                            dialogError = new Dialog(mContext);
+                            dialogError.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            dialogError.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            dialogError.setContentView(R.layout.dialog_error);
+                            dialogError.getWindow().getAttributes();//.windowAnimations = R.style.DialogAnimation;
+                            dialogError.show();
+                            ok = (MyTextViewRegularFont) dialogError.findViewById(R.id.ok);
+                            ok.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialogError.cancel();
+                                }
+                            });
+
+                            //myOb+jectSaveDidNotSucceed();
                         }
                     }
                 });
