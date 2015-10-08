@@ -33,6 +33,8 @@
     <dimen name="margin_large_x">25dp</dimen>
 
     <dimen name="height">70dp</dimen>
+    <dimen name="width">80dp</dimen>
+
 
 
 </resources>

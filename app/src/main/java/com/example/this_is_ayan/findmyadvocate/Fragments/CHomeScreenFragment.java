@@ -44,10 +44,6 @@ public class CHomeScreenFragment extends Fragment
         View view=inflater.inflate(R.layout.c_homescreenfragment,container,false);
 
         progressView=(ProgressView)view.findViewById(R.id.progress_view);
-        //progressView.start();
-
-
-      
 
         mRecyclerView = (RecyclerView)view.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -55,7 +51,6 @@ public class CHomeScreenFragment extends Fragment
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new CardAdapter(getActivity(),getData());
      //   mRecyclerView.setAdapter(mAdapter);
-
 
 
     /*    mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
@@ -69,13 +64,6 @@ public class CHomeScreenFragment extends Fragment
             }
 
         });*/
-
-
-
-
-
-
-
 
 
         fab=(FloatingActionButton)view.findViewById(R.id.fab);
@@ -116,8 +104,6 @@ public class CHomeScreenFragment extends Fragment
                   //  mAdapter.notifyDataSetChanged();
                     mRecyclerView.setAdapter(mAdapter);
                     progressView.stop();
-
-
                   //  mSwipeRefreshLayout.setRefreshing(false);
 
                 }

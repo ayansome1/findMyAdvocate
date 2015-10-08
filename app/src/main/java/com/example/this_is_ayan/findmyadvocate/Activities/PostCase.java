@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.KeyListener;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -35,12 +36,13 @@ public class PostCase extends ActionBarActivity
     boolean titleFilledBoolean,descriptionFilledBoolean;
     ImageView saveImageView;
 
-    MyTextViewRegularFont ok;
+    MyTextViewRegularFont ok,cancel,dialogText;
     Dialog dialog;
     Context mContext;
     ProgressView progressView;
     KeyListener titleKeyListener,descriptionKeyListener;
     InputMethodManager imm;
+
 
     //   Dialog dialog;
     @Override
@@ -49,7 +51,7 @@ public class PostCase extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_case);
 
-
+        switchProfileVisibility=(Switch)findViewById(R.id.Switch);
         progressView =(ProgressView)findViewById(R.id.progress_view);
 
 
@@ -59,6 +61,107 @@ public class PostCase extends ActionBarActivity
         switchProfileVisibility=(Switch)findViewById(R.id.Switch);
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         saveImageView=(ImageView)findViewById(R.id.save);
+
+        switchProfileVisibility.setTag("TAG");
+
+       switchProfileVisibility.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
+           @Override
+           public void onCheckedChanged(Switch view, boolean checked) {
+               if (switchProfileVisibility.isChecked() == true && switchProfileVisibility.getTag() == null)
+               {
+                   switchProfileVisibility.setTag("TAG");
+                   dialog = new Dialog(mContext);
+                   dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                   dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                   dialog.setContentView(R.layout.dialog_switch);
+                   dialog.getWindow().getAttributes();//.windowAnimations = R.style.DialogAnimation;
+                   dialog.show();
+                   dialog.setCanceledOnTouchOutside(false);
+                   dialog.setCancelable(false);
+                   dialogText=(MyTextViewRegularFont)dialog.findViewById(R.id.switch_text);
+
+                   dialogText.setText("Your profile details will be visible to advocates.Continue?");
+
+
+                   ok = (MyTextViewRegularFont) dialog.findViewById(R.id.ok);
+                   ok.setOnClickListener(new View.OnClickListener()
+                   {
+                       @Override
+                       public void onClick(View v)
+                       {
+                          dialog.cancel();
+
+                       }
+                   });
+
+                   cancel = (MyTextViewRegularFont) dialog.findViewById(R.id.cancel);
+                   cancel.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View v)
+                       {
+                           switchProfileVisibility.setChecked(false);
+                           dialog.cancel();
+
+                       }
+                   });
+
+
+
+               }
+               else if (switchProfileVisibility.isChecked() == false && switchProfileVisibility.getTag() == null)
+               {
+                   switchProfileVisibility.setTag("TAG");
+                   dialog = new Dialog(mContext);
+                   dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                   dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                   dialog.setContentView(R.layout.dialog_switch);
+                   dialog.getWindow().getAttributes();//.windowAnimations = R.style.DialogAnimation;
+                   dialog.show();
+                   dialog.setCanceledOnTouchOutside(false);
+                   dialog.setCancelable(false);
+                   dialogText=(MyTextViewRegularFont)dialog.findViewById(R.id.switch_text);
+
+                   dialogText.setText("Your profile details will not be shown to advocates.Continue?");
+
+
+                   ok = (MyTextViewRegularFont) dialog.findViewById(R.id.ok);
+                   ok.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View v) {
+                           dialog.cancel();
+
+                       }
+                   });
+
+                   cancel = (MyTextViewRegularFont) dialog.findViewById(R.id.cancel);
+                   cancel.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View v) {
+                           switchProfileVisibility.setChecked(true);
+                           dialog.cancel();
+
+                       }
+                   });
+
+
+
+
+
+               }
+
+           }
+       });
+
+       switchProfileVisibility.setOnTouchListener(new View.OnTouchListener() {
+           @Override
+           public boolean onTouch(View v, MotionEvent event) {
+               switchProfileVisibility.setTag(null);
+
+               return false;
+           }
+       });
+
+
 
 
         setSupportActionBar(toolbar);
@@ -70,6 +173,7 @@ public class PostCase extends ActionBarActivity
                 onBackPressed();
             }
         });
+
 
         getSupportActionBar().setTitle("");
         titleEditText=(com.example.this_is_ayan.findmyadvocate.Widgets.EditText)findViewById(R.id.title);
@@ -116,24 +220,19 @@ public class PostCase extends ActionBarActivity
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-                description=descriptionEditText.getText().toString();
-                if(description.length() != 0)
-                {
-                    descriptionFilledBoolean=true;
-                    if(titleFilledBoolean==true)
-                      saveImageView.setVisibility(View.VISIBLE);
-                }
-                else
-                {
-                    descriptionFilledBoolean=false;
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                description = descriptionEditText.getText().toString();
+                if (description.length() != 0) {
+                    descriptionFilledBoolean = true;
+                    if (titleFilledBoolean == true)
+                        saveImageView.setVisibility(View.VISIBLE);
+                } else {
+                    descriptionFilledBoolean = false;
                     saveImageView.setVisibility(View.INVISIBLE);
 
                 }
             }
         });
-
 
 
         saveImageView.setOnClickListener(new View.OnClickListener() {
@@ -189,9 +288,8 @@ public class PostCase extends ActionBarActivity
                             ok = (MyTextViewRegularFont) dialog.findViewById(R.id.ok);
                             ok.setOnClickListener(new View.OnClickListener() {
                                 @Override
-                                public void onClick(View v)
-                                {
-                                    Intent intent=new Intent();
+                                public void onClick(View v) {
+                                    Intent intent = new Intent();
                                     setResult(2, intent);  // 2 means  refresh needed of the recycler view
                                     finish();
 

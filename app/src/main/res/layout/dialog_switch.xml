@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:orientation="vertical"
+    android:minWidth="300dp">
+
+    <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont
+        android:id="@+id/switch_text"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/font_larger"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/margin_large"
+        android:paddingLeft="@dimen/margin_large"
+        android:paddingRight="@dimen/margin_large"
+        android:paddingBottom="@dimen/margin_large"
+
+        android:text="text"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:orientation="horizontal">
+
+        <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont
+            android:id="@+id/cancel"
+            android:layout_width="@dimen/width"
+            android:text="CANCEL"
+            android:textSize="@dimen/font_small"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+            android:gravity="center"
+
+            android:paddingTop="@dimen/margin_medium"
+            android:paddingBottom="@dimen/margin_medium"/>
+        <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont
+            android:id="@+id/ok"
+            android:layout_width="@dimen/width"
+            android:text="OK"
+            android:textSize="@dimen/font_small"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+            android:gravity="center"
+
+            android:paddingTop="@dimen/margin_medium"
+            android:paddingBottom="@dimen/margin_medium"
+
+            />
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
