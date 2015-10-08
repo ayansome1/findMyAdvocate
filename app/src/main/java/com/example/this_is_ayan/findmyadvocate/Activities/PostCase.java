@@ -18,6 +18,7 @@ import android.widget.ImageView;
 
 import com.example.this_is_ayan.findmyadvocate.Objects.cases;
 import com.example.this_is_ayan.findmyadvocate.R;
+import com.example.this_is_ayan.findmyadvocate.Widgets.ConnectionDetector;
 import com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont;
 import com.example.this_is_ayan.findmyadvocate.Widgets.ProgressView;
 import com.example.this_is_ayan.findmyadvocate.Widgets.Switch;
@@ -36,12 +37,16 @@ public class PostCase extends ActionBarActivity
     boolean titleFilledBoolean,descriptionFilledBoolean;
     ImageView saveImageView;
 
-    MyTextViewRegularFont ok,cancel,dialogText;
+    MyTextViewRegularFont ok,cancel,dialogText,error;
     Dialog dialog,dialogLoading,dialogError;
     Context mContext;
     ProgressView progressView;
     KeyListener titleKeyListener,descriptionKeyListener;
     InputMethodManager imm;
+
+    ConnectionDetector cd ;
+
+    Boolean isInternetPresent;
 
 
     //   Dialog dialog;
@@ -54,6 +59,7 @@ public class PostCase extends ActionBarActivity
         switchProfileVisibility=(Switch)findViewById(R.id.Switch);
         progressView =(ProgressView)findViewById(R.id.progress_view);
 
+       cd = new ConnectionDetector(getApplicationContext());
 
         mContext=this;
 
@@ -121,7 +127,7 @@ public class PostCase extends ActionBarActivity
                    dialog.setCancelable(false);
                    dialogText=(MyTextViewRegularFont)dialog.findViewById(R.id.switch_text);
 
-                   dialogText.setText("Your profile details will not be shown to advocates.Continue?");
+                   dialogText.setText("Your profile details will not be visible to advocates.Continue?");
 
 
                    ok = (MyTextViewRegularFont) dialog.findViewById(R.id.ok);
@@ -238,6 +244,36 @@ public class PostCase extends ActionBarActivity
         saveImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //check internet connectivity start
+                isInternetPresent = cd.isConnectingToInternet();
+                if(isInternetPresent==false)
+                {
+                    dialogError = new Dialog(mContext);
+                    dialogError.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialogError.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialogError.setContentView(R.layout.dialog_error);
+                    dialogError.getWindow().getAttributes();//.windowAnimations = R.style.DialogAnimation;
+                    error=(MyTextViewRegularFont)dialogError.findViewById(R.id.error);
+                    error.setText("Please check your Internet Connectivity");
+
+                    dialogError.show();
+                    ok = (MyTextViewRegularFont) dialogError.findViewById(R.id.ok);
+                    ok.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialogError.cancel();
+                        }
+                    });
+
+
+                    return;
+
+
+                }
+                //check internet connectivity end
+
+
                 saveImageView.setVisibility(View.INVISIBLE);
               //  progressView.start();
 

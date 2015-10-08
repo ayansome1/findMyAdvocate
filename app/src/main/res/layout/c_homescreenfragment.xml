@@ -5,10 +5,31 @@
         android:layout_height="match_parent"
         android:background="@color/grey_lighten_2">
 
- <!--   <android.support.v4.widget.SwipeRefreshLayout
+
+    <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont
+        android:id="@+id/start_posting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/margin_large"
+        android:layout_marginRight="@dimen/margin_large"
+
+        android:paddingLeft="@dimen/margin_medium"
+        android:paddingRight="@dimen/margin_medium"
+        android:paddingTop="@dimen/margin_large"
+        android:paddingBottom="@dimen/margin_large"
+
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="You haven't posted any case yet.Start by posting a case now."
+        android:textSize="@dimen/font_large"
+        android:visibility="invisible"/>
+
+    <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">-->
+        android:layout_height="wrap_content">
+
 
         <android.support.v7.widget.RecyclerView
              android:id="@+id/recycler_view"
@@ -16,7 +37,7 @@
              android:layout_height="match_parent"
              android:paddingBottom="@dimen/margin_mini" />
 
-  <!--  </android.support.v4.widget.SwipeRefreshLayout>-->
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
      <com.example.this_is_ayan.findmyadvocate.Widgets.ProgressView
@@ -40,8 +61,8 @@
         android:layout_marginBottom="12dp"
         android:layout_marginRight="16dp"
         android:src="@drawable/ic_edit"
-        app:fab_colorNormal="@color/blue_standard"
-        app:fab_colorPressed="@color/grey_standard"
+        app:fab_colorNormal="@color/blue"
+        app:fab_colorPressed="@color/blue_darken_1"
         app:fab_elevationCompat="4dp"/>
 
 

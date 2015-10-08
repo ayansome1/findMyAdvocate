@@ -1,20 +1,26 @@
 package com.example.this_is_ayan.findmyadvocate.Fragments;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 
 import com.example.this_is_ayan.findmyadvocate.Activities.PostCase;
 import com.example.this_is_ayan.findmyadvocate.Adapters.CardAdapter;
 import com.example.this_is_ayan.findmyadvocate.Objects.caseObject;
 import com.example.this_is_ayan.findmyadvocate.R;
+import com.example.this_is_ayan.findmyadvocate.Widgets.ConnectionDetector;
 import com.example.this_is_ayan.findmyadvocate.Widgets.FloatingActionButton;
+import com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont;
 import com.example.this_is_ayan.findmyadvocate.Widgets.ProgressView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -33,7 +39,16 @@ public class CHomeScreenFragment extends Fragment
      RecyclerView.Adapter mAdapter;
    public boolean datachanged;
     ProgressView progressView;
-   // SwipeRefreshLayout mSwipeRefreshLayout;
+    SwipeRefreshLayout mSwipeRefreshLayout;
+    MyTextViewRegularFont startPosting;
+    Dialog dialogError;
+    MyTextViewRegularFont ok,error;
+
+    InputMethodManager imm;
+
+    ConnectionDetector cd ;
+
+    Boolean isInternetPresent;
 
 
 
@@ -43,6 +58,8 @@ public class CHomeScreenFragment extends Fragment
 
         View view=inflater.inflate(R.layout.c_homescreenfragment,container,false);
 
+        cd = new ConnectionDetector(getActivity());
+
         progressView=(ProgressView)view.findViewById(R.id.progress_view);
 
         mRecyclerView = (RecyclerView)view.findViewById(R.id.recycler_view);
@@ -50,20 +67,25 @@ public class CHomeScreenFragment extends Fragment
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new CardAdapter(getActivity(),getData());
+
+        startPosting=(MyTextViewRegularFont)view.findViewById(R.id.start_posting);
+
+
+
      //   mRecyclerView.setAdapter(mAdapter);
 
 
-    /*    mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.red, R.color.green, R.color.blue);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh()
             {
                 mAdapter = new CardAdapter(getActivity(), getData());
-                mRecyclerView.setAdapter(mAdapter);
+             //   mRecyclerView.setAdapter(mAdapter);
             }
 
-        });*/
+        });
 
 
         fab=(FloatingActionButton)view.findViewById(R.id.fab);
@@ -81,7 +103,14 @@ public class CHomeScreenFragment extends Fragment
 
     public  List<caseObject> getData()
     {
-        final List<caseObject> mItems = new ArrayList<>();
+
+        //progressView.start();
+
+
+
+
+
+            final List<caseObject> mItems = new ArrayList<>();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("cases");
         query.whereEqualTo("user", ParseUser.getCurrentUser());
         query.findInBackground(new FindCallback<ParseObject>() {
@@ -101,12 +130,67 @@ public class CHomeScreenFragment extends Fragment
                         mItems.add(cases);
                     }
 
-                  //  mAdapter.notifyDataSetChanged();
+                    //  mAdapter.notifyDataSetChanged();
                     mRecyclerView.setAdapter(mAdapter);
                     progressView.stop();
-                  //  mSwipeRefreshLayout.setRefreshing(false);
+
+                    if(len==0)
+                    {
+                      //  System.out.println("len is "+len);
+                        startPosting.setVisibility(View.VISIBLE);
+
+                    }
+                    else
+                    {
+                       // System.out.println("len is "+len);
+
+                        startPosting.setVisibility(View.INVISIBLE);
+
+                    }
+
+
+
+                      mSwipeRefreshLayout.setRefreshing(false);
 
                 }
+                else
+                {
+                    mSwipeRefreshLayout.setRefreshing(false);
+
+
+                    progressView.stop();
+
+                    isInternetPresent = cd.isConnectingToInternet();
+                    if(isInternetPresent==false)
+                    {
+
+                        dialogError = new Dialog(getActivity());
+                        dialogError.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialogError.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        dialogError.setContentView(R.layout.dialog_error);
+                        dialogError.getWindow().getAttributes();//.windowAnimations = R.style.DialogAnimation;
+                        error = (MyTextViewRegularFont) dialogError.findViewById(R.id.error);
+                        error.setText("Please enable your Internet Connection");
+
+                        dialogError.show();
+                        ok = (MyTextViewRegularFont) dialogError.findViewById(R.id.ok);
+                        ok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v)
+                            {
+                                dialogError.cancel();
+
+
+                            }
+                        });
+                        // if(isInternetPresent==false)
+                        //  return null;
+                    }
+                   // startPosting.setVisibility(View.VISIBLE);
+
+
+                }
+
             }
         });
 
