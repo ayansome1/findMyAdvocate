@@ -105,6 +105,7 @@
 
 
     <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewLightFont
+        android:id="@+id/location"
         android:layout_width="match_parent"
         android:layout_height="@dimen/standard_height"
         android:text="Choose location"

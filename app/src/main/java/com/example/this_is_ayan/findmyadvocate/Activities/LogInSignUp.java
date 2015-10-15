@@ -40,16 +40,19 @@ public class LogInSignUp extends FragmentActivity
     EditText editTextemailSignin,editTextpasswordSignin, editTextnameSignUp, editTextemailSignUp,editTextPasswordSignUp;
 
     String nameSignup,emailSignup,passwordSignup,passwordSignin,emailSignin;
-    boolean validation;
+     boolean validation;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in_sign_up);
         findviewbyid();
         mContext=this;
         validation=false;
+
+
+
 
         mAdapter = new TestFragmentAdapter(getSupportFragmentManager());
 
@@ -158,7 +161,7 @@ public class LogInSignUp extends FragmentActivity
                 dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
                 dialog.show();
 
-                editTextemailSignin = (EditText) dialog.findViewById(R.id.email_signin);
+                editTextemailSignin    = (EditText) dialog.findViewById(R.id.email_signin);
                 editTextpasswordSignin = (EditText) dialog.findViewById(R.id.password_signin);
 
 
@@ -170,11 +173,8 @@ public class LogInSignUp extends FragmentActivity
                         emailSignin = editTextemailSignin.getText().toString();
                         passwordSignin = editTextpasswordSignin.getText().toString();
 
-                        validation = false;
+                       // validation = false;
                         validation = validateSigninEntries();
-
-
-
 
 
                         if (validation == true)
@@ -229,23 +229,6 @@ public class LogInSignUp extends FragmentActivity
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             }
 
 
@@ -291,7 +274,14 @@ public class LogInSignUp extends FragmentActivity
 
     public boolean validateSigninEntries()
     {
-    /*    if (!isValidEmail(emailSignin))
+
+        if((emailSignin.equals("a") && passwordSignin.equals("a")) || (emailSignin.equals("b") && passwordSignin.equals("b") ) ) ///remove this line after testing
+        {
+            return true;
+        }
+
+
+        if (!isValidEmail(emailSignin))
         {
             Toast.makeText(getApplicationContext(), "Invalid Email", Toast.LENGTH_SHORT).show();
             return false;
@@ -302,7 +292,7 @@ public class LogInSignUp extends FragmentActivity
             Toast.makeText(getApplicationContext(), "Invalid Password", Toast.LENGTH_SHORT).show();
             return false;
 
-        }*/
+        }
         return true;
 
     }
