@@ -22,6 +22,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.example.this_is_ayan.findmyadvocate.Adapters.CategoryAdapter;
+import com.example.this_is_ayan.findmyadvocate.Objects.CaseCategory;
 import com.example.this_is_ayan.findmyadvocate.Objects.cases;
 import com.example.this_is_ayan.findmyadvocate.R;
 import com.example.this_is_ayan.findmyadvocate.Widgets.ConnectionDetector;
@@ -31,8 +33,11 @@ import com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont;
 import com.example.this_is_ayan.findmyadvocate.Widgets.PlaceJSONParser;
 import com.example.this_is_ayan.findmyadvocate.Widgets.ProgressView;
 import com.example.this_is_ayan.findmyadvocate.Widgets.Switch;
+import com.parse.FindCallback;
 import com.parse.ParseACL;
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -46,11 +51,18 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class PostCase extends ActionBarActivity
 {
+
+ //   CaseCategory item[];
+  //  ArrayAdapter<CaseCategory> adapterCaseCategory;
+  //  ArrayAdapter<CaseCategory> adapterCaseCategory;
+    CategoryAdapter categoryAdapter;
+
     SimpleAdapter adapter;
 
     Toolbar toolbar;
@@ -59,7 +71,7 @@ public class PostCase extends ActionBarActivity
     String title,description,location;
     boolean titleFilledBoolean,descriptionFilledBoolean;
     ImageView saveImageView;
-    MyTextViewLightFont locationTextView;
+    MyTextViewLightFont locationTextView,caseCategoryTextView;
 
     MyTextViewRegularFont ok,cancel,dialogText,error;
     Dialog dialog,dialogLoading,dialogError;
@@ -71,19 +83,22 @@ public class PostCase extends ActionBarActivity
     Boolean isInternetPresent;
 
     MyEditTextLightFont atvPlaces;
-    ListView l;
+    ListView l, listViewCaseCategories;
     PlacesTask placesTask;
     ParserTask parserTask;
 
 
     //   Dialog dialog;
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_case);
 
+
+
         locationTextView =(MyTextViewLightFont)findViewById(R.id.location);
+        caseCategoryTextView=(MyTextViewLightFont)findViewById(R.id.case_category);
 
         switchProfileVisibility=(Switch)findViewById(R.id.Switch);
         progressView =(ProgressView)findViewById(R.id.progress_view);
@@ -96,6 +111,38 @@ public class PostCase extends ActionBarActivity
         switchProfileVisibility=(Switch)findViewById(R.id.Switch);
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         saveImageView=(ImageView)findViewById(R.id.save);
+
+
+        caseCategoryTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                dialog = new Dialog(mContext);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.setContentView(R.layout.case_category);
+                dialog.getWindow().getAttributes();
+                dialog.show();
+
+                listViewCaseCategories = (ListView)dialog.findViewById(R.id.list_categories);
+                //getData();
+
+                categoryAdapter = new CategoryAdapter(getApplicationContext(), R.layout.case_category,getData());
+
+                //Set the above adapter as the adapter of choice for our list
+                listViewCaseCategories.setAdapter(categoryAdapter);
+
+                //adapterCaseCategory = new ArrayAdapter<CaseCategory>(getApplicationContext(),android.R.layout.simple_list_item_1, getData());
+               //listViewCaseCategories.setAdapter(adapterCaseCategory);
+
+
+
+
+
+
+            }
+        });
+
 
 
         locationTextView.setOnClickListener(new View.OnClickListener() {
@@ -111,9 +158,12 @@ public class PostCase extends ActionBarActivity
 //                wlp.gravity = Gravity.TOP;
 
                 dialog.getWindow().getAttributes();//.windowAnimations = R.style.DialogAnimation;
-                dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+              //  View.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
 
                 dialog.show();
+                dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+
 
                 progressViewLocation = (ProgressView) dialog.findViewById(R.id.progress_view);
 
@@ -133,8 +183,13 @@ public class PostCase extends ActionBarActivity
                         HashMap<String, Object> obj = (HashMap<String, Object>) adapter.getItem(position);
                         location = (String) obj.get("description");
 
+                       // dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
                         dialog.cancel();
                         locationTextView.setText(location);
+
+                        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
 
 
                     }
@@ -145,7 +200,39 @@ public class PostCase extends ActionBarActivity
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        if (atvPlaces.getText().length() > 0) {
+                        if (atvPlaces.getText().length() > 0)
+                        {
+
+                            isInternetPresent = cd.isConnectingToInternet();
+                            if(isInternetPresent==false)
+                            {
+                                dialogError = new Dialog(mContext);
+                                dialogError.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                dialogError.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                dialogError.setContentView(R.layout.dialog_error);
+                                dialogError.getWindow().getAttributes();//.windowAnimations = R.style.DialogAnimation;
+                                error=(MyTextViewRegularFont)dialogError.findViewById(R.id.error);
+                                error.setText("Please check your Internet Connectivity");
+
+                                dialogError.show();
+                                ok = (MyTextViewRegularFont) dialogError.findViewById(R.id.ok);
+                                ok.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialogError.cancel();
+                                        dialog.cancel();
+                                    }
+                                });
+
+
+                                return;
+
+
+                            }
+
+
+
+
                             atvPlaces.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_search, 0, R.drawable.ic_navigation_cancel, 0);
 
                             placesTask = new PlacesTask();
@@ -660,6 +747,49 @@ public class PostCase extends ActionBarActivity
 
 
         }
+    }
+
+
+
+    public  List<CaseCategory> getData()
+    {
+        //progressView.start();
+        final List<CaseCategory> mItems = new ArrayList<>();
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("CaseCategories");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> caseList, ParseException e) {
+
+                if (e == null) {
+                    int len = caseList.size();
+                    for (int i = 0; i <len; i++) {
+                        ParseObject p = caseList.get(i);
+                        String caseCategory = p.getString("Categories");
+                        //String caseDescription = p.getString("caseDescription");
+                      //  System.out.println("***"+caseCategory);
+
+                        CaseCategory cases = new CaseCategory();
+                        cases.setCaseCategory(caseCategory);
+                        //cases.setCaseTitle(caseTitle);
+                        //cases.setCaseDescription(caseDescription);
+                        mItems.add(cases);
+                    }
+
+                      categoryAdapter.notifyDataSetChanged();
+                    listViewCaseCategories.setAdapter(categoryAdapter);
+                 //   mRecyclerView.setAdapter(mAdapter);
+                   // progressView.stop();
+
+
+
+                    //mSwipeRefreshLayout.setRefreshing(false);
+
+                }
+
+            }
+        });
+
+        return mItems;
     }
 
 

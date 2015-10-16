@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/category"
+    android:singleLine="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:textSize="@dimen/font_small"
+    android:textColor="@color/grey_standard"
+    android:paddingTop="@dimen/margin_medium"
+    android:paddingBottom="@dimen/margin_medium"
+    android:paddingLeft="@dimen/margin_medium"
+    android:paddingRight="@dimen/margin_medium"   />
+</FrameLayout>

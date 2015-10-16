@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_large">
+
+    <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_large"
+        android:gravity="center_horizontal"
+        android:text="Case Category"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="200dp"
+        android:layout_marginTop="@dimen/margin_large">
+
+
+        <com.example.this_is_ayan.findmyadvocate.Widgets.ProgressView
+            android:id="@+id/progress_view"
+            android:layout_width="@dimen/standard_height_half"
+            android:layout_height="@dimen/standard_height_half"
+            app:pv_autostart="false"
+
+            android:layout_gravity="center_vertical|center_horizontal"
+            app:pv_progressStyle="@style/Material.Drawable.CircularProgress"
+            app:pv_progressMode="indeterminate"/>
+
+
+
+        <ListView
+            android:id="@+id/list_categories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/list_divider"
+            android:dividerHeight="0.5dp"
+            android:paddingBottom="@dimen/margin_small">
+        </ListView>
+
+
+
+    </FrameLayout>
+
+</LinearLayout>

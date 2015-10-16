@@ -110,7 +110,7 @@ public class CHomeScreenFragment extends Fragment
 
 
 
-            final List<caseObject> mItems = new ArrayList<>();
+        final List<caseObject> mItems = new ArrayList<>();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("cases");
         query.whereEqualTo("user", ParseUser.getCurrentUser());
         query.findInBackground(new FindCallback<ParseObject>() {
@@ -201,7 +201,6 @@ public class CHomeScreenFragment extends Fragment
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
-        System.out.println("result code is "+resultCode);
         if(resultCode==2)// 2 is sent by PostCase class and it means  refreshing to be done of the recycler view
         {
             progressView.start();

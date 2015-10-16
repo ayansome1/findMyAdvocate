@@ -122,6 +122,7 @@
 
 
     <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewLightFont
+        android:id="@+id/case_category"
         android:layout_width="match_parent"
         android:layout_height="@dimen/standard_height"
         android:text="Select case category"

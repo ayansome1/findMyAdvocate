@@ -36,6 +36,8 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         app:centered="true"
+
+
         app:fillColor="#f57f17"
         app:pageColor="@android:color/white"
         app:radius="4dp"
@@ -50,11 +52,13 @@
         android:paddingTop="@dimen/margin_small"
         android:paddingLeft="@dimen/margin_medium"
         android:paddingRight="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_large_x"
+        android:layout_marginBottom="@dimen/margin_large_x"
         android:orientation="vertical">
 
 
 
-        <ImageView
+     <!--   <ImageView
             android:id="@+id/fb"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -68,7 +72,7 @@
             android:layout_height="40dp"
             android:layout_marginBottom="@dimen/margin_small"
             android:background="@drawable/g"
-            android:gravity="center" />
+            android:gravity="center" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
