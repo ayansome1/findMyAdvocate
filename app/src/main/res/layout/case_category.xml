@@ -21,12 +21,12 @@
 
         <com.example.this_is_ayan.findmyadvocate.Widgets.ProgressView
             android:id="@+id/progress_view"
-            android:layout_width="@dimen/standard_height_half"
-            android:layout_height="@dimen/standard_height_half"
-            app:pv_autostart="false"
+            android:layout_width="@dimen/standard_height"
+            android:layout_height="@dimen/standard_height"
+            app:pv_autostart="true"
 
             android:layout_gravity="center_vertical|center_horizontal"
-            app:pv_progressStyle="@style/Material.Drawable.CircularProgress"
+            app:pv_progressStyle="@style/Material.Drawable.CircularProgress.Grey"
             app:pv_progressMode="indeterminate"/>
 
 

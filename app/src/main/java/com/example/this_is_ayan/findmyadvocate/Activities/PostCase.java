@@ -68,7 +68,7 @@ public class PostCase extends ActionBarActivity
     Toolbar toolbar;
     Switch switchProfileVisibility;
     com.example.this_is_ayan.findmyadvocate.Widgets.EditText titleEditText,descriptionEditText;
-    String title,description,location;
+    String title,description,location,category;
     boolean titleFilledBoolean,descriptionFilledBoolean;
     ImageView saveImageView;
     MyTextViewLightFont locationTextView,caseCategoryTextView;
@@ -117,26 +117,68 @@ public class PostCase extends ActionBarActivity
             @Override
             public void onClick(View v)
             {
-                dialog = new Dialog(mContext);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                dialog.setContentView(R.layout.case_category);
-                dialog.getWindow().getAttributes();
-                dialog.show();
+                isInternetPresent = cd.isConnectingToInternet();
+                if(isInternetPresent==false)
+                {
 
-                listViewCaseCategories = (ListView)dialog.findViewById(R.id.list_categories);
-                //getData();
+                    dialogError = new Dialog(mContext);
+                    dialogError.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialogError.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialogError.setContentView(R.layout.dialog_error);
+                    dialogError.getWindow().getAttributes();//.windowAnimations = R.style.DialogAnimation;
+                    error = (MyTextViewRegularFont) dialogError.findViewById(R.id.error);
+                    error.setText("Please enable your Internet Connection");
 
-                categoryAdapter = new CategoryAdapter(getApplicationContext(), R.layout.case_category,getData());
+                    dialogError.show();
 
-                //Set the above adapter as the adapter of choice for our list
-                listViewCaseCategories.setAdapter(categoryAdapter);
+                    ok = (MyTextViewRegularFont) dialogError.findViewById(R.id.ok);
+                    ok.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            dialogError.cancel();
 
-                //adapterCaseCategory = new ArrayAdapter<CaseCategory>(getApplicationContext(),android.R.layout.simple_list_item_1, getData());
-               //listViewCaseCategories.setAdapter(adapterCaseCategory);
 
 
 
+                        }
+                    });
+                    // if(isInternetPresent==false)
+                    //  return null;
+                    //return;
+                }
+
+                else {
+
+
+                    dialog = new Dialog(mContext);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.setContentView(R.layout.case_category);
+                    dialog.getWindow().getAttributes();
+                    dialog.show();
+                    progressView=(ProgressView)dialog.findViewById(R.id.progress_view);
+
+                    listViewCaseCategories = (ListView) dialog.findViewById(R.id.list_categories);
+                    categoryAdapter = new CategoryAdapter(getApplicationContext(), R.layout.case_category, getData());
+
+                    listViewCaseCategories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                        {
+                            CaseCategory obj = categoryAdapter.getItem(position);
+                            category = obj.getCaseCategory();
+
+                          //  category =  (listViewCaseCategories.getItemAtPosition(position)).toString();
+                            caseCategoryTextView.setText(category);
+                            dialog.cancel();
+                        }
+                    });
+
+
+
+
+                }
 
 
 
@@ -753,38 +795,33 @@ public class PostCase extends ActionBarActivity
 
     public  List<CaseCategory> getData()
     {
-        //progressView.start();
         final List<CaseCategory> mItems = new ArrayList<>();
+        //progressView.start();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("CaseCategories");
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> caseList, ParseException e) {
 
-                if (e == null) {
+                if (e == null)
+                {
                     int len = caseList.size();
                     for (int i = 0; i <len; i++) {
                         ParseObject p = caseList.get(i);
                         String caseCategory = p.getString("Categories");
-                        //String caseDescription = p.getString("caseDescription");
-                      //  System.out.println("***"+caseCategory);
-
                         CaseCategory cases = new CaseCategory();
                         cases.setCaseCategory(caseCategory);
-                        //cases.setCaseTitle(caseTitle);
-                        //cases.setCaseDescription(caseDescription);
                         mItems.add(cases);
                     }
 
                       categoryAdapter.notifyDataSetChanged();
+                    progressView.stop();
+
                     listViewCaseCategories.setAdapter(categoryAdapter);
                  //   mRecyclerView.setAdapter(mAdapter);
-                   // progressView.stop();
-
-
-
                     //mSwipeRefreshLayout.setRefreshing(false);
 
                 }
+
 
             }
         });
