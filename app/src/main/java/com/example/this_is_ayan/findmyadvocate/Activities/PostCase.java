@@ -3,9 +3,10 @@ package com.example.this_is_ayan.findmyadvocate.Activities;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -34,6 +35,7 @@ import com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont;
 import com.example.this_is_ayan.findmyadvocate.Widgets.PlaceJSONParser;
 import com.example.this_is_ayan.findmyadvocate.Widgets.ProgressView;
 import com.example.this_is_ayan.findmyadvocate.Widgets.Switch;
+import com.example.this_is_ayan.findmyadvocate.snackBar.SnackBar;
 import com.parse.FindCallback;
 import com.parse.ParseACL;
 import com.parse.ParseException;
@@ -56,33 +58,33 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class PostCase extends ActionBarActivity
-{
+public class PostCase extends AppCompatActivity {
 
- //   CaseCategory item[];
-  //  ArrayAdapter<CaseCategory> adapterCaseCategory;
-  //  ArrayAdapter<CaseCategory> adapterCaseCategory;
+    //   CaseCategory item[];
+    //  ArrayAdapter<CaseCategory> adapterCaseCategory;
+    //  ArrayAdapter<CaseCategory> adapterCaseCategory;
     CategoryAdapter categoryAdapter;
     FrameLayout profileVisibilityFrameLayout;
+    Typeface type;
 
     SimpleAdapter adapter;
 
     Toolbar toolbar;
     Switch switchProfileVisibility;
-    com.example.this_is_ayan.findmyadvocate.Widgets.EditText titleEditText,descriptionEditText;
-    String title,description,location,category;
-    boolean titleFilledBoolean,descriptionFilledBoolean;
+    com.example.this_is_ayan.findmyadvocate.Widgets.EditText titleEditText, descriptionEditText;
+    String title, description, location, category,snackbarErrorMessage;
+    boolean titleFilledBoolean, descriptionFilledBoolean;
     ImageView saveImageView;
-    MyTextViewLightFont locationTextView,caseCategoryTextView;
+    MyTextViewLightFont locationTextView, caseCategoryTextView;
 
-    MyTextViewRegularFont ok,cancel,dialogText,error;
-    Dialog dialog,dialogLoading,dialogError;
+    MyTextViewRegularFont ok, cancel, dialogText, error;
+    Dialog dialog, dialogLoading, dialogError;
     Context mContext;
-    ProgressView progressView,progressViewLocation;
-    KeyListener titleKeyListener,descriptionKeyListener;
+    ProgressView progressView, progressViewLocation;
+    KeyListener titleKeyListener, descriptionKeyListener;
     InputMethodManager imm;
-    ConnectionDetector cd ;
-    Boolean isInternetPresent;
+    ConnectionDetector cd;
+    Boolean isInternetPresent,proflieVisibilityBoolean;
 
     MyEditTextLightFont atvPlaces;
     ListView l, listViewCaseCategories;
@@ -92,40 +94,39 @@ public class PostCase extends ActionBarActivity
 
     //   Dialog dialog;
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_case);
-       // imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        proflieVisibilityBoolean=false;
+        type = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/DINPro_Regular.ttf");
+
+        // imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         //imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        profileVisibilityFrameLayout=(FrameLayout)findViewById(R.id.profile_visibility);
+        profileVisibilityFrameLayout = (FrameLayout) findViewById(R.id.profile_visibility);
 
 
+        locationTextView = (MyTextViewLightFont) findViewById(R.id.location);
+        caseCategoryTextView = (MyTextViewLightFont) findViewById(R.id.case_category);
 
-        locationTextView =(MyTextViewLightFont)findViewById(R.id.location);
-        caseCategoryTextView=(MyTextViewLightFont)findViewById(R.id.case_category);
+        switchProfileVisibility = (Switch) findViewById(R.id.Switch);
+        progressView = (ProgressView) findViewById(R.id.progress_view);
 
-        switchProfileVisibility=(Switch)findViewById(R.id.Switch);
-        progressView =(ProgressView)findViewById(R.id.progress_view);
+        cd = new ConnectionDetector(getApplicationContext());
 
-       cd = new ConnectionDetector(getApplicationContext());
+        mContext = this;
 
-        mContext=this;
-
-        titleFilledBoolean=descriptionFilledBoolean=false;
-        switchProfileVisibility=(Switch)findViewById(R.id.Switch);
-        toolbar=(Toolbar)findViewById(R.id.toolbar);
-        saveImageView=(ImageView)findViewById(R.id.save);
+        titleFilledBoolean = descriptionFilledBoolean = false;
+        switchProfileVisibility = (Switch) findViewById(R.id.Switch);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        saveImageView = (ImageView) findViewById(R.id.save);
 
 
         caseCategoryTextView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 isInternetPresent = cd.isConnectingToInternet();
-                if(isInternetPresent==false)
-                {
+                if (isInternetPresent == false) {
 
                     dialogError = new Dialog(mContext);
                     dialogError.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -140,11 +141,8 @@ public class PostCase extends ActionBarActivity
                     ok = (MyTextViewRegularFont) dialogError.findViewById(R.id.ok);
                     ok.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(View v)
-                        {
+                        public void onClick(View v) {
                             dialogError.cancel();
-
-
 
 
                         }
@@ -152,9 +150,7 @@ public class PostCase extends ActionBarActivity
                     // if(isInternetPresent==false)
                     //  return null;
                     //return;
-                }
-
-                else {
+                } else {
 
 
                     dialog = new Dialog(mContext);
@@ -163,34 +159,29 @@ public class PostCase extends ActionBarActivity
                     dialog.setContentView(R.layout.case_category);
                     dialog.getWindow().getAttributes();
                     dialog.show();
-                    progressView=(ProgressView)dialog.findViewById(R.id.progress_view);
+                    progressView = (ProgressView) dialog.findViewById(R.id.progress_view);
 
                     listViewCaseCategories = (ListView) dialog.findViewById(R.id.list_categories);
                     categoryAdapter = new CategoryAdapter(getApplicationContext(), R.layout.case_category, getData());
 
                     listViewCaseCategories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                        {
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             CaseCategory obj = categoryAdapter.getItem(position);
                             category = obj.getCaseCategory();
 
-                          //  category =  (listViewCaseCategories.getItemAtPosition(position)).toString();
+                            //  category =  (listViewCaseCategories.getItemAtPosition(position)).toString();
                             caseCategoryTextView.setText(category);
                             dialog.cancel();
                         }
                     });
 
 
-
-
                 }
-
 
 
             }
         });
-
 
 
         locationTextView.setOnClickListener(new View.OnClickListener() {
@@ -206,7 +197,7 @@ public class PostCase extends ActionBarActivity
 //                wlp.gravity = Gravity.TOP;
 
                 dialog.getWindow().getAttributes();//.windowAnimations = R.style.DialogAnimation;
-              //  View.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                //  View.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
 
                 dialog.show();
@@ -225,19 +216,17 @@ public class PostCase extends ActionBarActivity
 
                 l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                    {
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                         HashMap<String, Object> obj = (HashMap<String, Object>) adapter.getItem(position);
                         location = (String) obj.get("description");
 
-                       // dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+                        // dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
                         dialog.cancel();
                         locationTextView.setText(location);
 
                         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
 
 
                     }
@@ -248,18 +237,16 @@ public class PostCase extends ActionBarActivity
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        if (atvPlaces.getText().length() > 0)
-                        {
+                        if (atvPlaces.getText().length() > 0) {
 
                             isInternetPresent = cd.isConnectingToInternet();
-                            if(isInternetPresent==false)
-                            {
+                            if (isInternetPresent == false) {
                                 dialogError = new Dialog(mContext);
                                 dialogError.requestWindowFeature(Window.FEATURE_NO_TITLE);
                                 dialogError.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                                 dialogError.setContentView(R.layout.dialog_error);
                                 dialogError.getWindow().getAttributes();//.windowAnimations = R.style.DialogAnimation;
-                                error=(MyTextViewRegularFont)dialogError.findViewById(R.id.error);
+                                error = (MyTextViewRegularFont) dialogError.findViewById(R.id.error);
                                 error.setText("Please check your Internet Connectivity");
 
                                 dialogError.show();
@@ -277,8 +264,6 @@ public class PostCase extends ActionBarActivity
 
 
                             }
-
-
 
 
                             atvPlaces.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_search, 0, R.drawable.ic_navigation_cancel, 0);
@@ -330,10 +315,9 @@ public class PostCase extends ActionBarActivity
 
         profileVisibilityFrameLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                if (switchProfileVisibility.isChecked() == true )
-                {
+            public void onClick(View v) {
+                if (switchProfileVisibility.isChecked() == true) {
+
                     switchProfileVisibility.setChecked(false);
                     dialog = new Dialog(mContext);
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -368,9 +352,7 @@ public class PostCase extends ActionBarActivity
                     });
 
 
-                }
-                else if (switchProfileVisibility.isChecked() == false)
-                {
+                } else if (switchProfileVisibility.isChecked() == false) {
                     switchProfileVisibility.setChecked(true);
                     dialog = new Dialog(mContext);
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -407,102 +389,100 @@ public class PostCase extends ActionBarActivity
 
                 }
 
-
+              //  proflieVisibilityBoolean = switchProfileVisibility.isChecked();
             }
         });
 
 
+        switchProfileVisibility.setTag("TAG");
 
-       switchProfileVisibility.setTag("TAG");
+        switchProfileVisibility.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(Switch view, boolean checked) {
+                if (switchProfileVisibility.isChecked() == true && switchProfileVisibility.getTag() == null) {
+                    switchProfileVisibility.setTag("TAG");
+                    dialog = new Dialog(mContext);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.setContentView(R.layout.dialog_switch);
+                    dialog.getWindow().getAttributes();//.windowAnimations = R.style.DialogAnimation;
+                    dialog.show();
+                    dialog.setCanceledOnTouchOutside(false);
+                    dialog.setCancelable(false);
+                    dialogText = (MyTextViewRegularFont) dialog.findViewById(R.id.switch_text);
 
-       switchProfileVisibility.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
-           @Override
-           public void onCheckedChanged(Switch view, boolean checked) {
-               if (switchProfileVisibility.isChecked() == true && switchProfileVisibility.getTag() == null) {
-                   switchProfileVisibility.setTag("TAG");
-                   dialog = new Dialog(mContext);
-                   dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                   dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                   dialog.setContentView(R.layout.dialog_switch);
-                   dialog.getWindow().getAttributes();//.windowAnimations = R.style.DialogAnimation;
-                   dialog.show();
-                   dialog.setCanceledOnTouchOutside(false);
-                   dialog.setCancelable(false);
-                   dialogText = (MyTextViewRegularFont) dialog.findViewById(R.id.switch_text);
-
-                   dialogText.setText("Your profile details will be visible to advocates.Continue?");
-
-
-                   ok = (MyTextViewRegularFont) dialog.findViewById(R.id.ok);
-                   ok.setOnClickListener(new View.OnClickListener() {
-                       @Override
-                       public void onClick(View v) {
-                           dialog.cancel();
-
-                       }
-                   });
-
-                   cancel = (MyTextViewRegularFont) dialog.findViewById(R.id.cancel);
-                   cancel.setOnClickListener(new View.OnClickListener() {
-                       @Override
-                       public void onClick(View v) {
-                           switchProfileVisibility.setChecked(false);
-                           dialog.cancel();
-
-                       }
-                   });
+                    dialogText.setText("Your profile details will be visible to advocates.Continue?");
 
 
-               } else if (switchProfileVisibility.isChecked() == false && switchProfileVisibility.getTag() == null) {
-                   switchProfileVisibility.setTag("TAG");
-                   dialog = new Dialog(mContext);
-                   dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                   dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                   dialog.setContentView(R.layout.dialog_switch);
-                   dialog.getWindow().getAttributes();//.windowAnimations = R.style.DialogAnimation;
-                   dialog.show();
-                   dialog.setCanceledOnTouchOutside(false);
-                   dialog.setCancelable(false);
-                   dialogText = (MyTextViewRegularFont) dialog.findViewById(R.id.switch_text);
+                    ok = (MyTextViewRegularFont) dialog.findViewById(R.id.ok);
+                    ok.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.cancel();
 
-                   dialogText.setText("Your profile details will not be visible to advocates.Continue?");
+                        }
+                    });
 
+                    cancel = (MyTextViewRegularFont) dialog.findViewById(R.id.cancel);
+                    cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            switchProfileVisibility.setChecked(false);
+                            dialog.cancel();
 
-                   ok = (MyTextViewRegularFont) dialog.findViewById(R.id.ok);
-                   ok.setOnClickListener(new View.OnClickListener() {
-                       @Override
-                       public void onClick(View v) {
-                           dialog.cancel();
-
-                       }
-                   });
-
-                   cancel = (MyTextViewRegularFont) dialog.findViewById(R.id.cancel);
-                   cancel.setOnClickListener(new View.OnClickListener() {
-                       @Override
-                       public void onClick(View v) {
-                           switchProfileVisibility.setChecked(true);
-                           dialog.cancel();
-
-                       }
-                   });
+                        }
+                    });
 
 
-               }
+                } else if (switchProfileVisibility.isChecked() == false && switchProfileVisibility.getTag() == null) {
+                    switchProfileVisibility.setTag("TAG");
+                    dialog = new Dialog(mContext);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.setContentView(R.layout.dialog_switch);
+                    dialog.getWindow().getAttributes();//.windowAnimations = R.style.DialogAnimation;
+                    dialog.show();
+                    dialog.setCanceledOnTouchOutside(false);
+                    dialog.setCancelable(false);
+                    dialogText = (MyTextViewRegularFont) dialog.findViewById(R.id.switch_text);
 
-           }
-       });
-
-       switchProfileVisibility.setOnTouchListener(new View.OnTouchListener() {
-           @Override
-           public boolean onTouch(View v, MotionEvent event) {
-               switchProfileVisibility.setTag(null);
-
-               return false;
-           }
-       });
+                    dialogText.setText("Your profile details will not be visible to advocates.Continue?");
 
 
+                    ok = (MyTextViewRegularFont) dialog.findViewById(R.id.ok);
+                    ok.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.cancel();
+
+                        }
+                    });
+
+                    cancel = (MyTextViewRegularFont) dialog.findViewById(R.id.cancel);
+                    cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            switchProfileVisibility.setChecked(true);
+                            dialog.cancel();
+
+                        }
+                    });
+
+
+                }
+             //   proflieVisibilityBoolean = switchProfileVisibility.isChecked();
+
+            }
+        });
+
+        switchProfileVisibility.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switchProfileVisibility.setTag(null);
+
+                return false;
+            }
+        });
 
 
         setSupportActionBar(toolbar);
@@ -517,8 +497,8 @@ public class PostCase extends ActionBarActivity
 
 
         getSupportActionBar().setTitle("");
-        titleEditText=(com.example.this_is_ayan.findmyadvocate.Widgets.EditText)findViewById(R.id.title);
-        descriptionEditText=(com.example.this_is_ayan.findmyadvocate.Widgets.EditText)findViewById(R.id.description);
+        titleEditText = (com.example.this_is_ayan.findmyadvocate.Widgets.EditText) findViewById(R.id.title);
+        descriptionEditText = (com.example.this_is_ayan.findmyadvocate.Widgets.EditText) findViewById(R.id.description);
 
         titleEditText.addTextChangedListener(new TextWatcher() {
 
@@ -531,18 +511,14 @@ public class PostCase extends ActionBarActivity
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-                title=titleEditText.getText().toString();
-                if(title.length() != 0)
-                {
-                    titleFilledBoolean=true;
-                    if(descriptionFilledBoolean==true)
-                         saveImageView.setVisibility(View.VISIBLE);
-                }
-                else
-                {
-                    titleFilledBoolean=false;
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                title = titleEditText.getText().toString();
+                if (title.length() > 0 && title.length() <= 30) {
+                    titleFilledBoolean = true;
+                    if (descriptionFilledBoolean == true)
+                        saveImageView.setVisibility(View.VISIBLE);
+                } else {
+                    titleFilledBoolean = false;
                     saveImageView.setVisibility(View.INVISIBLE);
 
                 }
@@ -563,7 +539,7 @@ public class PostCase extends ActionBarActivity
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 description = descriptionEditText.getText().toString();
-                if (description.length() != 0) {
+                if (description.length() > 0 && description.length() <= 300) {
                     descriptionFilledBoolean = true;
                     if (titleFilledBoolean == true)
                         saveImageView.setVisibility(View.VISIBLE);
@@ -578,18 +554,37 @@ public class PostCase extends ActionBarActivity
 
         saveImageView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
+                snackbarErrorMessage = validateCase();
+                if (snackbarErrorMessage != "ok")
+                {
+                   // Toast.makeText(getApplicationContext(), snackbarErrorMessage, Toast.LENGTH_SHORT).show();
+
+                 //   new SnackBar.Builder(PostCase.this).withMessage("jj").withTypeFace(type).show();
+
+                    new SnackBar.Builder(PostCase.this)
+                            .withMessage(snackbarErrorMessage)
+                            .withTypeFace(type)
+                            .withBackgroundColorId(R.color.blue)
+                            .withTextColorId(R.color.white)
+                            .withDuration(SnackBar.SHORT_SNACK)
+
+                            .show();
+                    return;
+                }
+
+
 
                 //check internet connectivity start
                 isInternetPresent = cd.isConnectingToInternet();
-                if(isInternetPresent==false)
-                {
+                if (isInternetPresent == false) {
                     dialogError = new Dialog(mContext);
                     dialogError.requestWindowFeature(Window.FEATURE_NO_TITLE);
                     dialogError.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                     dialogError.setContentView(R.layout.dialog_error);
                     dialogError.getWindow().getAttributes();//.windowAnimations = R.style.DialogAnimation;
-                    error=(MyTextViewRegularFont)dialogError.findViewById(R.id.error);
+                    error = (MyTextViewRegularFont) dialogError.findViewById(R.id.error);
                     error.setText("Please check your Internet Connectivity");
 
                     dialogError.show();
@@ -606,15 +601,16 @@ public class PostCase extends ActionBarActivity
 
 
                 }
+
+
                 //check internet connectivity end
 
 
                 saveImageView.setVisibility(View.INVISIBLE);
-              //  progressView.start();
+                //  progressView.start();
 
                 imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-
 
 
                 dialogLoading = new Dialog(mContext);
@@ -631,7 +627,7 @@ public class PostCase extends ActionBarActivity
 
             /*    titleKeyListener = titleEditText.getKeyListener();
                 descriptionKeyListener=descriptionEditText.getKeyListener();*/
-              //  titleEditText.setKeyListener(null);
+                //  titleEditText.setKeyListener(null);
                 //descriptionEditText.setKeyListener(null);
 
 
@@ -649,6 +645,11 @@ public class PostCase extends ActionBarActivity
                 cases.setUser(ParseUser.getCurrentUser());
                 cases.put("caseTitle", title);
                 cases.put("caseDescription", description);
+                cases.put("caseLocation",location);
+                cases.put("caseCategory",category);
+                proflieVisibilityBoolean = switchProfileVisibility.isChecked();
+
+                cases.put("profileVisibility",proflieVisibilityBoolean);
                 //    cases.saveInBackground();
 
 
@@ -657,7 +658,7 @@ public class PostCase extends ActionBarActivity
                     public void done(ParseException e) {
                         if (e == null) {
                             dialogLoading.cancel();
-                           // progressView.stop();
+                            // progressView.stop();
                             //   saveImageView.setVisibility(View.VISIBLE);
                             // titleEditText.setKeyListener(titleKeyListener);
                             //descriptionEditText.setKeyListener(descriptionKeyListener);
@@ -686,11 +687,9 @@ public class PostCase extends ActionBarActivity
                             // saveImageView.setVisibility(View.VISIBLE);
 
 
-                        }
-                        else
-                        {
+                        } else {
                             saveImageView.setVisibility(View.VISIBLE);
-                           // progressView.stop();
+                            // progressView.stop();
                             dialogLoading.cancel();
                             dialogError = new Dialog(mContext);
                             dialogError.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -716,25 +715,21 @@ public class PostCase extends ActionBarActivity
         });
         switchProfileVisibility.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
 
             }
         });
 
 
-
     }
-    @Override
-    public void onBackPressed()
-    {
 
-        Intent intent=new Intent();
-        setResult(1,intent);  // 1 means no refresh needed of the recycler view
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent();
+        setResult(1, intent);  // 1 means no refresh needed of the recycler view
         finish();
     }
-
-
 
 
     /**
@@ -808,7 +803,7 @@ public class PostCase extends ActionBarActivity
             //String sensor = "sensor=false";
 
             // Building the parameters to the web service
-            String parameters = input + "&" + types + "&"  + key;
+            String parameters = input + "&" + types + "&" + key;
 
             // Output format
             String output = "json";
@@ -870,7 +865,7 @@ public class PostCase extends ActionBarActivity
             int[] to = new int[]{android.R.id.text1};
 
             // Creating a SimpleAdapter for the AutoCompleteTextView
-             adapter = new SimpleAdapter(getBaseContext(), result, R.layout.list_item, from, to);
+            adapter = new SimpleAdapter(getBaseContext(), result, R.layout.list_item, from, to);
 
             // Setting the adapter
             //  atvPlaces.setAdapter(adapter);
@@ -884,9 +879,7 @@ public class PostCase extends ActionBarActivity
     }
 
 
-
-    public  List<CaseCategory> getData()
-    {
+    public List<CaseCategory> getData() {
         final List<CaseCategory> mItems = new ArrayList<>();
         //progressView.start();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("CaseCategories");
@@ -894,10 +887,9 @@ public class PostCase extends ActionBarActivity
             @Override
             public void done(List<ParseObject> caseList, ParseException e) {
 
-                if (e == null)
-                {
+                if (e == null) {
                     int len = caseList.size();
-                    for (int i = 0; i <len; i++) {
+                    for (int i = 0; i < len; i++) {
                         ParseObject p = caseList.get(i);
                         String caseCategory = p.getString("Categories");
                         CaseCategory cases = new CaseCategory();
@@ -905,11 +897,11 @@ public class PostCase extends ActionBarActivity
                         mItems.add(cases);
                     }
 
-                      categoryAdapter.notifyDataSetChanged();
+                    categoryAdapter.notifyDataSetChanged();
                     progressView.stop();
 
                     listViewCaseCategories.setAdapter(categoryAdapter);
-                 //   mRecyclerView.setAdapter(mAdapter);
+                    //   mRecyclerView.setAdapter(mAdapter);
                     //mSwipeRefreshLayout.setRefreshing(false);
 
                 }
@@ -921,7 +913,18 @@ public class PostCase extends ActionBarActivity
         return mItems;
     }
 
-
+    String validateCase()
+    {
+        if(location==null)
+        {
+            return "Please choose a location";
+        }
+        else if(category==null)
+        {
+            return  "Please choose a case category";
+        }
+        return "ok";
+    }
 
 
 }

@@ -49,6 +49,9 @@
 
     <color name="nagigation_icon">#FFFFFF</color>
 
+    <!--snack bar-->
+    <color name="sb__snack_bkgnd">#FB6E52</color>
+
 
 
 
