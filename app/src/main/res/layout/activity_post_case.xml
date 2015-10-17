@@ -135,6 +135,7 @@
         android:layout_marginRight="@dimen/margin_medium"/>
 
     <FrameLayout
+        android:id="@+id/profile_visibility"
         android:layout_width="match_parent"
         android:layout_height="@dimen/standard_height"
         android:layout_marginLeft="@dimen/margin_medium"

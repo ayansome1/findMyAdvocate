@@ -18,6 +18,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -62,6 +63,7 @@ public class PostCase extends ActionBarActivity
   //  ArrayAdapter<CaseCategory> adapterCaseCategory;
   //  ArrayAdapter<CaseCategory> adapterCaseCategory;
     CategoryAdapter categoryAdapter;
+    FrameLayout profileVisibilityFrameLayout;
 
     SimpleAdapter adapter;
 
@@ -94,6 +96,10 @@ public class PostCase extends ActionBarActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_case);
+       // imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        //imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        profileVisibilityFrameLayout=(FrameLayout)findViewById(R.id.profile_visibility);
 
 
 
@@ -321,7 +327,93 @@ public class PostCase extends ActionBarActivity
             }
         });
 
-        switchProfileVisibility.setTag("TAG");
+
+        profileVisibilityFrameLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                if (switchProfileVisibility.isChecked() == true )
+                {
+                    switchProfileVisibility.setChecked(false);
+                    dialog = new Dialog(mContext);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.setContentView(R.layout.dialog_switch);
+                    dialog.getWindow().getAttributes();//.windowAnimations = R.style.DialogAnimation;
+                    dialog.show();
+                    dialog.setCanceledOnTouchOutside(false);
+                    dialog.setCancelable(false);
+                    dialogText = (MyTextViewRegularFont) dialog.findViewById(R.id.switch_text);
+
+                    dialogText.setText("Your profile details will not be visible to advocates.Continue?");
+
+
+                    ok = (MyTextViewRegularFont) dialog.findViewById(R.id.ok);
+                    ok.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.cancel();
+
+                        }
+                    });
+
+                    cancel = (MyTextViewRegularFont) dialog.findViewById(R.id.cancel);
+                    cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            switchProfileVisibility.setChecked(true);
+                            dialog.cancel();
+
+                        }
+                    });
+
+
+                }
+                else if (switchProfileVisibility.isChecked() == false)
+                {
+                    switchProfileVisibility.setChecked(true);
+                    dialog = new Dialog(mContext);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.setContentView(R.layout.dialog_switch);
+                    dialog.getWindow().getAttributes();//.windowAnimations = R.style.DialogAnimation;
+                    dialog.show();
+                    dialog.setCanceledOnTouchOutside(false);
+                    dialog.setCancelable(false);
+                    dialogText = (MyTextViewRegularFont) dialog.findViewById(R.id.switch_text);
+
+                    dialogText.setText("Your profile details will  be visible to advocates.Continue?");
+
+
+                    ok = (MyTextViewRegularFont) dialog.findViewById(R.id.ok);
+                    ok.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.cancel();
+
+                        }
+                    });
+
+                    cancel = (MyTextViewRegularFont) dialog.findViewById(R.id.cancel);
+                    cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            switchProfileVisibility.setChecked(false);
+                            dialog.cancel();
+
+                        }
+                    });
+
+
+                }
+
+
+            }
+        });
+
+
+
+       switchProfileVisibility.setTag("TAG");
 
        switchProfileVisibility.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
            @Override
