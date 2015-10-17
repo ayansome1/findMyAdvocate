@@ -12,6 +12,7 @@
 
         <include layout="@layout/toolbar_layout"/>
         <ImageView
+            android:background="?android:attr/selectableItemBackground"
             android:id="@+id/save"
             android:layout_marginRight="@dimen/margin_mini"
             android:layout_width="wrap_content"
@@ -109,14 +110,15 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/standard_height"
         android:text="Choose location"
+        android:background="?android:attr/selectableItemBackground"
         android:drawableLeft="@drawable/location"
         android:textSize="@dimen/font_large"
         android:textColor="@color/blue_grey_darker_2"
         android:gravity="center_vertical"
         android:drawablePadding="@dimen/margin_medium"
         android:layout_marginTop="@dimen/margin_medium"
-        android:layout_marginLeft="@dimen/margin_medium"
-        android:layout_marginRight="@dimen/margin_medium"
+        android:paddingLeft="@dimen/margin_medium"
+        android:paddingRight="@dimen/margin_medium"
         />
 
 
@@ -126,20 +128,22 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/standard_height"
         android:text="Select case category"
+       android:background="?android:attr/selectableItemBackground"
         android:drawableLeft="@drawable/category"
         android:textSize="@dimen/font_large"
         android:textColor="@color/blue_grey_darker_2"
         android:gravity="center_vertical"
         android:drawablePadding="@dimen/margin_medium"
-        android:layout_marginLeft="@dimen/margin_medium"
-        android:layout_marginRight="@dimen/margin_medium"/>
+        android:paddingLeft="@dimen/margin_medium"
+        android:paddingRight="@dimen/margin_medium"/>
 
     <FrameLayout
         android:id="@+id/profile_visibility"
+        android:background="?android:attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="@dimen/standard_height"
-        android:layout_marginLeft="@dimen/margin_medium"
-        android:layout_marginRight="@dimen/margin_medium">
+        android:paddingLeft="@dimen/margin_medium"
+        android:paddingRight="@dimen/margin_medium">
 
         <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewLightFont
             android:layout_width="match_parent"

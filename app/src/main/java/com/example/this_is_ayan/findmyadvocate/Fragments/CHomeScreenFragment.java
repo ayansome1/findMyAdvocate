@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import com.example.this_is_ayan.findmyadvocate.Activities.PostCase;
 import com.example.this_is_ayan.findmyadvocate.Adapters.CardAdapter;
@@ -22,6 +23,7 @@ import com.example.this_is_ayan.findmyadvocate.Widgets.ConnectionDetector;
 import com.example.this_is_ayan.findmyadvocate.Widgets.FloatingActionButton;
 import com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont;
 import com.example.this_is_ayan.findmyadvocate.Widgets.ProgressView;
+import com.example.this_is_ayan.findmyadvocate.Widgets.RecyclerItemClickListener;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -69,6 +71,24 @@ public class CHomeScreenFragment extends Fragment
         mAdapter = new CardAdapter(getActivity(),getData());
 
         startPosting=(MyTextViewRegularFont)view.findViewById(R.id.start_posting);
+
+
+
+        mRecyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position)
+                    {
+                       // mRecyclerView.getAdapter().toString();
+                     //   mAdapter.getItemId(position);
+                      //  mRecyclerView.getChildPosition(view);
+                        Toast.makeText(getActivity(), "pos is "+position, Toast.LENGTH_SHORT).show();
+                        // do whatever
+                    }
+                })
+        );
+
+
+
 
 
 

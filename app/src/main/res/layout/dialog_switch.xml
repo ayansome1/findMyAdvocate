@@ -22,10 +22,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
         android:orientation="horizontal">
 
         <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont
             android:id="@+id/cancel"
+            android:background="?android:attr/selectableItemBackground"
             android:layout_width="@dimen/width"
             android:text="CANCEL"
             android:textSize="@dimen/font_small"
@@ -37,6 +40,7 @@
             android:paddingBottom="@dimen/margin_medium"/>
         <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont
             android:id="@+id/ok"
+            android:background="?android:attr/selectableItemBackground"
             android:layout_width="@dimen/width"
             android:text="OK"
             android:textSize="@dimen/font_small"
