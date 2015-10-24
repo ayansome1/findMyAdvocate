@@ -1,0 +1,31 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/toolbar_layout_height">
+
+<android.support.v7.widget.Toolbar
+    app:theme="@style/ThemeToolbar"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    android:layout_height="match_parent"
+    android:background="@color/blue_grey_darker_4"
+    android:layout_gravity="left"
+    android:gravity="center_vertical"
+    android:layout_width="match_parent">
+</android.support.v7.widget.Toolbar>
+
+    <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:textSize="@dimen/font_larger"
+        android:textColor="@color/white"
+        android:text="My Case"/>
+
+
+
+
+</FrameLayout>
+
+
+

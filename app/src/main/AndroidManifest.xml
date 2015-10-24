@@ -25,21 +25,25 @@
             android:name=".Activities.PostCase"
             android:label="@string/title_activity_post_case" >
         </activity>
-
         <activity
             android:name=".Activities.LogInSignUp"
             android:label="@string/title_activity_log_in_sign_up" >
         </activity>
-
         <activity
             android:name=".Activities.HomeActivity"
             android:label="Home Activity" >
         </activity>
 
-      <!--  <activity
+        <!--
+        <activity
             android:name=".Activities.SplashActivity"
             android:label="Splash Activity Activity" >
-        </activity>-->
+        </activity>
+        -->
+        <activity
+            android:name=".Activities.MyCase"
+            android:label="@string/title_activity_my_case" >
+        </activity>
     </application>
 
 </manifest>

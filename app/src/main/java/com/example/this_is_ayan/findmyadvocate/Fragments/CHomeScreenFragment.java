@@ -13,8 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
+import com.example.this_is_ayan.findmyadvocate.Activities.MyCase;
 import com.example.this_is_ayan.findmyadvocate.Activities.PostCase;
 import com.example.this_is_ayan.findmyadvocate.Adapters.CardAdapter;
 import com.example.this_is_ayan.findmyadvocate.Objects.caseObject;
@@ -35,11 +35,13 @@ import java.util.List;
 
 public class CHomeScreenFragment extends Fragment
 {
+    Intent i;
+    List<caseObject> mItems;
     FloatingActionButton fab;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-     RecyclerView.Adapter mAdapter;
-   public boolean datachanged;
+    RecyclerView.Adapter mAdapter;
+    public boolean datachanged;
     ProgressView progressView;
     SwipeRefreshLayout mSwipeRefreshLayout;
     MyTextViewRegularFont startPosting;
@@ -51,6 +53,7 @@ public class CHomeScreenFragment extends Fragment
     ConnectionDetector cd ;
 
     Boolean isInternetPresent;
+    String caseTitle,caseDescription,caseId;
 
 
 
@@ -78,11 +81,14 @@ public class CHomeScreenFragment extends Fragment
                 new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position)
                     {
-                       // mRecyclerView.getAdapter().toString();
-                     //   mAdapter.getItemId(position);
-                      //  mRecyclerView.getChildPosition(view);
-                        Toast.makeText(getActivity(), "pos is "+position, Toast.LENGTH_SHORT).show();
-                        // do whatever
+
+                      //  Toast.makeText(getActivity(), "pos is "+position+" case title is : "+mItems.get(position).getCaseTitle(), Toast.LENGTH_SHORT).show();
+                       // System.out.println(caseId);
+                        i = new Intent(getActivity(), MyCase.class);
+                        caseId=mItems.get(position).getCaseId();
+                        i.putExtra("caseId",caseId);
+                        startActivity(i);
+
                     }
                 })
         );
@@ -129,8 +135,7 @@ public class CHomeScreenFragment extends Fragment
 
 
 
-
-        final List<caseObject> mItems = new ArrayList<>();
+        mItems = new ArrayList<>();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("cases");
         query.whereEqualTo("user", ParseUser.getCurrentUser());
         query.findInBackground(new FindCallback<ParseObject>() {
@@ -141,12 +146,15 @@ public class CHomeScreenFragment extends Fragment
                     int len = caseList.size();
                     for (int i = len - 1; i >= 0; i--) {
                         ParseObject p = caseList.get(i);
-                        String caseTitle = p.getString("caseTitle");
-                        String caseDescription = p.getString("caseDescription");
+                         caseTitle = p.getString("caseTitle");
+                         caseDescription = p.getString("caseDescription");
+                         caseId=p.getObjectId();
+                       // p.getObjectId();
 
                         caseObject cases = new caseObject();
                         cases.setCaseTitle(caseTitle);
                         cases.setCaseDescription(caseDescription);
+                        cases.setCaseId(caseId);
                         mItems.add(cases);
                     }
 

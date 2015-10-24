@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/toolbar_layout_my_case"/>
+
+    </FrameLayout>
+
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewMediumFont
+
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_large"
+
+                    />
+
+                <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont
+
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_large"
+
+                    />
+
+            </LinearLayout>
+
+
+
+            <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewLightFont
+                android:id="@+id/location"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/standard_height"
+                android:drawableLeft="@drawable/location"
+                android:textSize="@dimen/font_large"
+                android:textColor="@color/blue_grey_darker_2"
+                android:gravity="center_vertical"
+                android:drawablePadding="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:paddingLeft="@dimen/margin_medium"
+                android:paddingRight="@dimen/margin_medium"
+                />
+
+
+
+            <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewLightFont
+                android:id="@+id/case_category"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/standard_height"
+                android:drawableLeft="@drawable/category"
+                android:textSize="@dimen/font_large"
+                android:textColor="@color/blue_grey_darker_2"
+                android:gravity="center_vertical"
+                android:drawablePadding="@dimen/margin_medium"
+                android:paddingLeft="@dimen/margin_medium"
+                android:paddingRight="@dimen/margin_medium"/>
+
+            <FrameLayout
+                android:id="@+id/profile_visibility"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/standard_height"
+                android:paddingLeft="@dimen/margin_medium"
+                android:paddingRight="@dimen/margin_medium">
+
+                <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewLightFont
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/standard_height"
+                    android:text="Profile visibility"
+                    android:drawableLeft="@drawable/visibility"
+                    android:textSize="@dimen/font_large"
+                    android:textColor="@color/blue_grey_darker_2"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="@dimen/margin_medium"
+                    />
+
+                <com.example.this_is_ayan.findmyadvocate.Widgets.Switch
+                    android:id="@+id/Switch"
+                    android:layout_gravity="right|center_vertical"
+                    android:checked="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    />
+
+            </FrameLayout>
+
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>
