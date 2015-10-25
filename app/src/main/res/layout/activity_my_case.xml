@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,45 +15,84 @@
 
     </FrameLayout>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/progress_view_frame_layout"
+        android:background="@color/grey_lighten_2">
+
+        <com.example.this_is_ayan.findmyadvocate.Widgets.ProgressView
+            android:id="@+id/progress_view"
+            android:layout_width="@dimen/standard_height"
+            android:layout_height="@dimen/standard_height"
+            app:pv_autostart="true"
+            android:layout_gravity="center"
+            app:pv_progressStyle="@style/Material.Drawable.CircularProgress"
+            app:pv_progressMode="indeterminate"/>
+    </FrameLayout>
+
 
     <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/grey_lighten_2">
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:orientation="vertical">
 
-            <LinearLayout
+
+
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical">
+                card_view:cardCornerRadius="4dp"
+                android:layout_marginTop="@dimen/margin_mini"
+                android:layout_marginLeft="@dimen/margin_mini"
+                android:layout_marginRight="@dimen/margin_mini" >
 
-                <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewMediumFont
-
-                    android:id="@+id/title"
+                <LinearLayout
+                    android:id="@+id/top_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/font_large"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/margin_medium"
+                    android:paddingRight="@dimen/margin_medium"
+                    android:paddingTop="@dimen/margin_small"
+                    android:paddingBottom="@dimen/margin_small"
+                    android:background="@color/white"
+                    android:layout_height="wrap_content">
 
-                    />
 
-                <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont
+                    <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewRegularFont
+                        android:id="@+id/title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black_text"
+                        android:textSize="@dimen/font_larger_x"
+                        android:text="Title"/>
 
-                    android:id="@+id/description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/font_large"
 
-                    />
+                    <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewLightFont
+                        android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_mini"
+                        android:textColor="@color/grey_text"
+                        android:textSize="@dimen/font_large"
+                        android:text="Description"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
 
-            </LinearLayout>
+
+
+
+
+
+
+
+
 
 
 
@@ -65,7 +105,7 @@
                 android:textColor="@color/blue_grey_darker_2"
                 android:gravity="center_vertical"
                 android:drawablePadding="@dimen/margin_medium"
-                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_small"
                 android:paddingLeft="@dimen/margin_medium"
                 android:paddingRight="@dimen/margin_medium"
                 />
