@@ -7,10 +7,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.FrameLayout;
 
 import com.example.this_is_ayan.findmyadvocate.Activities.LogInSignUp;
 import com.example.this_is_ayan.findmyadvocate.R;
+import com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewLightFont;
+import com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewMediumFont;
+import com.example.this_is_ayan.findmyadvocate.Widgets.ProgressView;
+import com.parse.GetCallback;
 import com.parse.ParseUser;
 
 /**
@@ -18,58 +22,54 @@ import com.parse.ParseUser;
  */
 public class MyProfile extends Fragment
 {
-   public static float heightOfFragmentLayout;
-    float linearLayoutHeight;
+    MyTextViewLightFont logout;
+    MyTextViewMediumFont nameMyTextViewMedium;
+    ProgressView progressView;
+    ParseUser currentUser;
+    FrameLayout progressViewFrameLayout;
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       View v=inflater.inflate(R.layout.my_profile,container,false);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
+        View v=inflater.inflate(R.layout.my_profile,container,false);
+        logout=(MyTextViewLightFont)v.findViewById(R.id.logout);
+        progressView=(ProgressView)v.findViewById(R.id.progress_view);
+        progressViewFrameLayout=(FrameLayout)v.findViewById(R.id.progress_view_frame_layout);
 
-      // images_product_frame=new ArrayList<FrameLayout>();
-
-
-    /*    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        int windowHeight = displayMetrics.heightPixels;
-        heightOfFragmentLayout = windowHeight - linearLayoutHeight;*/
-
-        TextView logout=(TextView)v.findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-               ParseUser currentUser = ParseUser.getCurrentUser();
-             /*   System.out.println(currentUser);
-                if(currentUser == null) {
-                    Intent intent = new Intent(getActivity(), LogInSignUp.class);
-                    startActivity(intent);
-                    getActivity().finish();
-                }*/
-
-            //    System.out.println(" c u before logout is "+currentUser);
-
+                currentUser = ParseUser.getCurrentUser();
                 currentUser.logOut();
-               // currentUser = ParseUser.getCurrentUser();
-             //  System.out.println("c u after logout is "+ currentUser);
-
                 Intent intent = new Intent(getActivity(), LogInSignUp.class);
                 startActivity(intent);
                 getActivity().finish();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             }
         });
+
+        nameMyTextViewMedium=(MyTextViewMediumFont)v.findViewById(R.id.name);
+
+        currentUser = ParseUser.getCurrentUser();
+        currentUser.fetchInBackground(new GetCallback<ParseUser>() {
+            @Override
+            public void done(ParseUser parseuser, com.parse.ParseException e)
+            {
+                if (e == null)
+                {
+                    progressView.stop();
+                    progressViewFrameLayout.setVisibility(View.GONE);
+                    nameMyTextViewMedium.setText(parseuser.getString("name"));
+                  //  System.out.println("*********************name is " + parseuser.getString("name") + " email is " + parseuser.getUsername());
+
+                }
+                else
+                {
+                    // Failure!
+                }
+            }
+        });
+
+
 
 
        return v;

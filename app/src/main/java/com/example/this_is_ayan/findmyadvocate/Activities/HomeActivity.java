@@ -39,8 +39,27 @@ public class HomeActivity extends AppCompatActivity
 
 
         ParseUser currentUser = ParseUser.getCurrentUser();
-//        System.out.print(currentUser.getUsername());
-       if(currentUser == null) {
+
+
+
+    /*    currentUser.fetchInBackground(new GetCallback<ParseUser>() {
+            @Override
+            public void done(ParseUser parseuser, com.parse.ParseException e)
+            {
+                if (e == null)
+                {
+                    System.out.println("*********************name is " + parseuser.getString("name") + " email is " + parseuser.getUsername());
+
+                }
+                else
+                {
+                    // Failure!
+                }
+            }
+        });*/
+
+
+        if(currentUser == null) {
             Intent intent = new Intent(this, LogInSignUp.class);
             startActivity(intent);
             finish();

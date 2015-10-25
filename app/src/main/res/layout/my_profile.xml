@@ -1,18 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
-    <TextView
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/grey_lighten_2">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/progress_view_frame_layout"
+        android:background="@color/grey_lighten_2"
+        >
+
+        <com.example.this_is_ayan.findmyadvocate.Widgets.ProgressView
+            android:id="@+id/progress_view"
+            android:layout_width="@dimen/standard_height"
+            android:layout_height="@dimen/standard_height"
+            app:pv_autostart="true"
+            android:layout_gravity="center"
+            app:pv_progressStyle="@style/Material.Drawable.CircularProgress"
+            app:pv_progressMode="indeterminate"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding= "@dimen/margin_large"
-        android:layout_gravity="center"
-        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@color/white"
 
-        android:background="@color/blue"
-        android:textColor="@color/white"
-        android:text="logout"/>
+        >
 
-</FrameLayout>
+        <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewMediumFont
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height"
+            android:textSize="@dimen/font_larger_xx"
+            android:gravity="center"
+            android:textColor="@color/blue_grey_darker_2"
+            android:layout_marginBottom="1dp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_lighten_2" />
+
+
+        <com.example.this_is_ayan.findmyadvocate.Widgets.MyTextViewLightFont
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height"
+            android:textSize="@dimen/font_larger_xx"
+            android:gravity="center"
+            android:text="logout"
+            android:textColor="@color/blue_grey_darker_2"
+            android:background="?android:attr/selectableItemBackground"
+            />
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
