@@ -23,7 +23,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-
 import com.example.this_is_ayan.findmyadvocate.Adapters.CategoryAdapter;
 import com.example.this_is_ayan.findmyadvocate.Objects.CaseCategory;
 import com.example.this_is_ayan.findmyadvocate.Objects.cases;
@@ -43,9 +42,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
-
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -58,8 +55,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class PostCase extends AppCompatActivity {
-
+public class PostCase extends AppCompatActivity
+{
     //   CaseCategory item[];
     //  ArrayAdapter<CaseCategory> adapterCaseCategory;
     //  ArrayAdapter<CaseCategory> adapterCaseCategory;

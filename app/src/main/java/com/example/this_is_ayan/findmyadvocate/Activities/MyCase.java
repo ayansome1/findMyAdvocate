@@ -73,6 +73,7 @@ public class MyCase extends AppCompatActivity
         caseCategoryMyTextViewLight=(MyTextViewLightFont)findViewById(R.id.case_category);
         s=(Switch)findViewById(R.id.Switch);
         s.setEnabled(false);
+        //s.setClickable(false);
 
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
